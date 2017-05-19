@@ -1,0 +1,1399 @@
+$ module add PrgEnv/GCC+OpenMPI/2017-03-20 gcc/6.2.0 cmake/3.6.0 cuda/8.0.61 openmpi/1.10.6
+$ export CC=gcc; export CXX=g++;
+$ cmake ..
+-- The C compiler identification is GNU 6.2.0
+-- The CXX compiler identification is GNU 6.2.0
+-- Check for working C compiler: /cm/extra/apps/GCC/6.2.0/GCC-4.8.5_GMP-6.1.1_MPFR-3.1.4_MPC-1.0.3/bin/gcc
+-- Check for working C compiler: /cm/extra/apps/GCC/6.2.0/GCC-4.8.5_GMP-6.1.1_MPFR-3.1.4_MPC-1.0.3/bin/gcc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /cm/extra/apps/GCC/6.2.0/GCC-4.8.5_GMP-6.1.1_MPFR-3.1.4_MPC-1.0.3/bin/g++
+-- Check for working CXX compiler: /cm/extra/apps/GCC/6.2.0/GCC-4.8.5_GMP-6.1.1_MPFR-3.1.4_MPC-1.0.3/bin/g++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring HOOMD v1.0.0
+-- Could NOT find MPI_C (missing:  MPI_C_LIBRARIES MPI_C_INCLUDE_PATH)
+-- Could NOT find MPI_CXX (missing:  MPI_CXX_LIBRARIES MPI_CXX_INCLUDE_PATH)
+-- Found PythonInterp: /usr/bin/python3 (found version "3.4.5")
+-- Found PythonLibs: /usr/lib64/libpython3.4m.so
+-- First attempt to find boost, it's OK if it fails
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Looking for pthread_create
+-- Looking for pthread_create - not found
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE
+CMake Warning at /cm/extra/apps/CMake/3.6.0/share/cmake-3.6/Modules/FindBoost.cmake:1459 (message):
+  No header defined for python-3.4; skipping header check
+Call Stack (most recent call first):
+  CMake/hoomd/HOOMDBoostSetup.cmake:29 (find_package)
+  CMakeLists.txt:35 (include)
+
+
+-- Could NOT find Boost
+-- Python python-3.4 not found, trying python or python3
+CMake Warning (dev) at /cm/extra/apps/CMake/3.6.0/share/cmake-3.6/Modules/FindBoost.cmake:1479 (if):
+  Policy CMP0054 is not set: Only interpret if() arguments as variables or
+  keywords when unquoted.  Run "cmake --help-policy CMP0054" for policy
+  details.  Use the cmake_policy command to set the policy and suppress this
+  warning.
+
+  Quoted variables like "thread" will no longer be dereferenced when the
+  policy is set to NEW.  Since the policy is not set the OLD behavior will be
+  used.
+Call Stack (most recent call first):
+  CMake/hoomd/HOOMDBoostSetup.cmake:51 (find_package)
+  CMakeLists.txt:35 (include)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at /cm/extra/apps/CMake/3.6.0/share/cmake-3.6/Modules/FindBoost.cmake:1521 (if):
+  Policy CMP0054 is not set: Only interpret if() arguments as variables or
+  keywords when unquoted.  Run "cmake --help-policy CMP0054" for policy
+  details.  Use the cmake_policy command to set the policy and suppress this
+  warning.
+
+  Quoted variables like "thread" will no longer be dereferenced when the
+  policy is set to NEW.  Since the policy is not set the OLD behavior will be
+  used.
+Call Stack (most recent call first):
+  CMake/hoomd/HOOMDBoostSetup.cmake:51 (find_package)
+  CMakeLists.txt:35 (include)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning at /cm/extra/apps/CMake/3.6.0/share/cmake-3.6/Modules/FindBoost.cmake:1459 (message):
+  No header defined for python3; skipping header check
+Call Stack (most recent call first):
+  CMake/hoomd/HOOMDBoostSetup.cmake:51 (find_package)
+  CMakeLists.txt:35 (include)
+
+
+CMake Error at /cm/extra/apps/CMake/3.6.0/share/cmake-3.6/Modules/FindBoost.cmake:1753 (message):
+  Unable to find the requested Boost libraries.
+
+  Boost version: 1.53.0
+
+  Boost include path: /usr/include
+
+  Could not find the following Boost libraries:
+
+          boost_python3
+
+  Some (but not all) of the required Boost libraries were found.  You may
+  need to install these additional Boost libraries.  Alternatively, set
+  BOOST_LIBRARYDIR to the directory containing Boost libraries or BOOST_ROOT
+  to the location of Boost.
+Call Stack (most recent call first):
+  CMake/hoomd/HOOMDBoostSetup.cmake:51 (find_package)
+  CMakeLists.txt:35 (include)
+
+
+-- Overriding CMake's default CFLAGS (this should appear only once)
+-- Found ZLIB: /usr/lib64/libz.so (found version "1.2.7")
+CMake Warning (dev) at libhoomd/api/CMakeLists.txt:21 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "libhoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/hoomd_script/CMakeLists.txt:20 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "hoomd".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+Call Stack (most recent call first):
+  test/hoomd_script/CMakeLists.txt:56 (add_hoomd_script_test)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "test_quat".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "test_rotmat2".  Use
+  the target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "test_rotmat3".  Use
+  the target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "test_vec2".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "test_vec3".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "test_messenger".  Use
+  the target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "test_cell_list".  Use
+  the target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target
+  "test_const_external_field_dipole".  Use the target name directly with
+  add_custom_command, or use the generator expression $<TARGET_FILE>, as
+  appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "test_index1d".  Use
+  the target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "test_gpu_array".  Use
+  the target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "test_pdata".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "test_particle_group".
+  Use the target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "test_utils".  Use the
+  target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target
+  "test_harmonic_bond_force".  Use the target name directly with
+  add_custom_command, or use the generator expression $<TARGET_FILE>, as
+  appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target
+  "test_harmonic_angle_force".  Use the target name directly with
+  add_custom_command, or use the generator expression $<TARGET_FILE>, as
+  appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target
+  "test_harmonic_dihedral_force".  Use the target name directly with
+  add_custom_command, or use the generator expression $<TARGET_FILE>, as
+  appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target
+  "test_harmonic_improper_force".  Use the target name directly with
+  add_custom_command, or use the generator expression $<TARGET_FILE>, as
+  appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target
+  "test_cgcmm_angle_force".  Use the target name directly with
+  add_custom_command, or use the generator expression $<TARGET_FILE>, as
+  appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "test_fenebond_force".
+  Use the target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "test_lj_wall_force".
+  Use the target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target
+  "test_external_periodic".  Use the target name directly with
+  add_custom_command, or use the generator expression $<TARGET_FILE>, as
+  appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "test_neighborlist".
+  Use the target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "test_lj_force".  Use
+  the target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target
+  "test_table_potential".  Use the target name directly with
+  add_custom_command, or use the generator expression $<TARGET_FILE>, as
+  appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target
+  "test_bondtable_bond_force".  Use the target name directly with
+  add_custom_command, or use the generator expression $<TARGET_FILE>, as
+  appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "test_slj_force".  Use
+  the target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "test_gaussian_force".
+  Use the target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "test_yukawa_force".
+  Use the target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "test_cgcmm_force".
+  Use the target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "test_morse_force".
+  Use the target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target
+  "test_force_shifted_lj".  Use the target name directly with
+  add_custom_command, or use the generator expression $<TARGET_FILE>, as
+  appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "test_nve_integrator".
+  Use the target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "test_nvt_integrator".
+  Use the target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target
+  "test_berendsen_integrator".  Use the target name directly with
+  add_custom_command, or use the generator expression $<TARGET_FILE>, as
+  appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target
+  "test_zero_momentum_updater".  Use the target name directly with
+  add_custom_command, or use the generator expression $<TARGET_FILE>, as
+  appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target
+  "test_temp_rescale_updater".  Use the target name directly with
+  add_custom_command, or use the generator expression $<TARGET_FILE>, as
+  appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "test_hoomd_xml".  Use
+  the target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "test_system".  Use
+  the target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target
+  "test_fire_energy_minimizer".  Use the target name directly with
+  add_custom_command, or use the generator expression $<TARGET_FILE>, as
+  appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target
+  "test_binary_reader_writer".  Use the target name directly with
+  add_custom_command, or use the generator expression $<TARGET_FILE>, as
+  appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target
+  "test_enforce2d_updater".  Use the target name directly with
+  add_custom_command, or use the generator expression $<TARGET_FILE>, as
+  appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target
+  "test_constraint_sphere".  Use the target name directly with
+  add_custom_command, or use the generator expression $<TARGET_FILE>, as
+  appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "test_ewald_force".
+  Use the target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "test_pppm_force".
+  Use the target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target
+  "test_table_dihedral_force".  Use the target name directly with
+  add_custom_command, or use the generator expression $<TARGET_FILE>, as
+  appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target
+  "test_table_angle_force".  Use the target name directly with
+  add_custom_command, or use the generator expression $<TARGET_FILE>, as
+  appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target
+  "test_bdnvt_integrator".  Use the target name directly with
+  add_custom_command, or use the generator expression $<TARGET_FILE>, as
+  appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target "test_dpd_integrator".
+  Use the target name directly with add_custom_command, or use the generator
+  expression $<TARGET_FILE>, as appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target
+  "test_bd_rigid_updater".  Use the target name directly with
+  add_custom_command, or use the generator expression $<TARGET_FILE>, as
+  appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at test/unit/CMakeLists.txt:143 (get_target_property):
+  Policy CMP0026 is not set: Disallow use of the LOCATION target property.
+  Run "cmake --help-policy CMP0026" for policy details.  Use the cmake_policy
+  command to set the policy and suppress this warning.
+
+  The LOCATION property should not be read from target
+  "test_npt_mtk_integrator".  Use the target name directly with
+  add_custom_command, or use the generator expression $<TARGET_FILE>, as
+  appropriate.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Configuring incomplete, errors occurred!
+See also "/home/spino/Code/repro/hoomd-blue/build/CMakeFiles/CMakeOutput.log".
+See also "/home/spino/Code/repro/hoomd-blue/build/CMakeFiles/CMakeError.log".

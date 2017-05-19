@@ -1,0 +1,54 @@
+HOOMD-blue 1.3.3-unknown CUDA (7.5) SINGLE MPI SSE SSE2 SSE3 
+Compiled: 03/06/2016
+Copyright 2009-2016 The Regents of the University of Michigan.
+
+All publications and presentations based on HOOMD-blue, including any reports
+or published results obtained, in whole or in part, with HOOMD-blue, will
+acknowledge its use according to the terms posted at the time of submission on:
+http://codeblue.umich.edu/hoomd-blue/citations.html
+-----
+You are using HOOMD-blue. Read and cite the following:
+* J A Anderson, C D Lorenz, and A Travesset. "General purpose molecular dynamics
+  simulations fully implemented on graphics processing units", Journal of
+  Computational Physics 227 (2008) 5342--5359
+and
+* J Glaser, T D Nguyen, J A Anderson, P Liu, F Spiga, J A Millan, D C Morse, and
+  S C Glotzer. "Strong scaling of general-purpose molecular dynamics simulations
+  on GPUs", Computer Physics Communications 192 (2015) 97--107
+and
+* http://codeblue.umich.edu/hoomd-blue
+You can save these citations to file using cite.save().
+-----
+notice(2): This system is not compute exclusive, using local rank to select GPUs
+notice(2): Unable to identify node local rank information
+notice(2): Using global rank to select GPUs
+HOOMD-blue is running on the following GPU(s):
+Rank 0:  [0]            Tesla K40m  15 SM_3.5 @ 0.745 GHz, 11439 MiB DRAM
+Rank 1:  [1]            Tesla K40m  15 SM_3.5 @ 0.745 GHz, 11439 MiB DRAM
+Rank 2:  [2]            Tesla K40m  15 SM_3.5 @ 0.745 GHz, 11439 MiB DRAM
+Rank 3:  [3]            Tesla K40m  15 SM_3.5 @ 0.745 GHz, 11439 MiB DRAM
+polymer_brush.py:012  |  system=init.read_xml(filename='init.xml')
+notice(2): Reading init.xml...
+notice(2): --- hoomd_xml file read summary
+notice(2): 1740 positions at timestep 0
+notice(2): 1740 velocities
+notice(2): 1740 masses
+notice(2): 1740 diameters
+notice(2): 5 particle types
+notice(2): 1740 particle body values
+notice(2): 1580 bonds
+notice(2): 1420 angles
+notice(2): 3780 dihedrals
+notice(2): 1740 charges
+*Warning*: Unable to find a decomposition with requested dimensions. Choosing default decomposition.
+HOOMD-blue is using domain decomposition: n_x = 1 n_y = 1 n_z = 4.
+notice(2): Group "all" created containing 1740 particles
+polymer_brush.py:017  |  comm.decomposition(nx=4, ny=4, nz=4)
+**ERROR**:  (Rank 0): comm.decomposition: cannot modify decomposition after system is initialized. Call before init.*
+Traceback (most recent call last):
+  File "polymer_brush.py", line 17, in <module>
+    comm.decomposition(nx=4, ny=4, nz=4)
+  File "/home/spino/miniconda2/lib/python2.7/site-packages/hoomd_script/comm.py", line 171, in __init__
+    raise RuntimeError("Cannot create decomposition after system is initialized. Call before init.*")
+RuntimeError: Cannot create decomposition after system is initialized. Call before init.*
+application called MPI_Abort(MPI_COMM_WORLD, 15) - process 0

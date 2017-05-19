@@ -1,0 +1,1744 @@
+################################################################
+CPU n=8
+################################################################
+################################################################
+Running: mpirun -n 2 python polymer_brush.py --mode=cpu --user=8
+HOOMD-blue 1.3.3-unknown CUDA (7.5) SINGLE MPI SSE SSE2 SSE3 
+Compiled: 03/06/2016
+Copyright 2009-2016 The Regents of the University of Michigan.
+
+All publications and presentations based on HOOMD-blue, including any reports
+or published results obtained, in whole or in part, with HOOMD-blue, will
+acknowledge its use according to the terms posted at the time of submission on:
+http://codeblue.umich.edu/hoomd-blue/citations.html
+-----
+You are using HOOMD-blue. Read and cite the following:
+* J A Anderson, C D Lorenz, and A Travesset. "General purpose molecular dynamics
+  simulations fully implemented on graphics processing units", Journal of
+  Computational Physics 227 (2008) 5342--5359
+and
+* J Glaser, T D Nguyen, J A Anderson, P Liu, F Spiga, J A Millan, D C Morse, and
+  S C Glotzer. "Strong scaling of general-purpose molecular dynamics simulations
+  on GPUs", Computer Physics Communications 192 (2015) 97--107
+and
+* http://codeblue.umich.edu/hoomd-blue
+You can save these citations to file using cite.save().
+-----
+Ranks 0-1: HOOMD-blue is running on the CPU
+polymer_brush.py:012  |  system=init.read_xml(filename='init.xml')
+notice(2): Reading init.xml...
+notice(2): --- hoomd_xml file read summary
+notice(2): 1740 positions at timestep 0
+notice(2): 1740 velocities
+notice(2): 1740 masses
+notice(2): 1740 diameters
+notice(2): 5 particle types
+notice(2): 1740 particle body values
+notice(2): 1580 bonds
+notice(2): 1420 angles
+notice(2): 3780 dihedrals
+notice(2): 1740 charges
+HOOMD-blue is using domain decomposition: n_x = 1 n_y = 1 n_z = 2.
+1 x 1 x 2 local grid on 1 nodes
+notice(2): Group "all" created containing 1740 particles
+polymer_brush.py:018  |  system.replicate(nx=rep, ny=rep, nz=1)
+polymer_brush.py:019  |  typeW1=group.type('W1')
+notice(2): Group "type W1" created containing 3840 particles
+polymer_brush.py:020  |  typeW2=group.type('W2')
+*Warning*: W2 does not exist in the system, creating an empty group
+notice(2): Group "type W2" created containing 0 particles
+notice(2): Group "Wall" created containing 3840 particles
+polymer_brush.py:022  |  typeB= group.type('B')
+notice(2): Group "type B" created containing 65280 particles
+polymer_brush.py:023  |  typeSolvBackBone = group.type('Solvent')
+notice(2): Group "type Solvent" created containing 25600 particles
+polymer_brush.py:024  |  typeC= group.type('C')
+*Warning*: C does not exist in the system, creating an empty group
+notice(2): Group "type C" created containing 0 particles
+polymer_brush.py:025  |  typeCH3_W1=group.type('CH3_W1')
+notice(2): Group "type CH3_W1" created containing 3840 particles
+polymer_brush.py:026  |  typeCH3_W2=group.type('CH3_W2')
+*Warning*: CH3_W2 does not exist in the system, creating an empty group
+notice(2): Group "type CH3_W2" created containing 0 particles
+polymer_brush.py:027  |  typeSolvTail=group.type('SolvTail')
+notice(2): Group "type SolvTail" created containing 12800 particles
+notice(2): Group "BCH3-particles" created containing 69120 particles
+notice(2): Group "CCH3-particles" created containing 0 particles
+notice(2): Group "all-solvent" created containing 38400 particles
+notice(2): Group "bc-particles" created containing 69120 particles
+notice(2): Group "typeAll" created containing 107520 particles
+notice(2): Group "typeNPT" created containing 111360 particles
+Number of polymeric particles 107520
+polymer_brush.py:044  |  lj = pair.lj(r_cut=3.3)
+nlist.py:1051  |          globals.neighbor_list = cell();
+polymer_brush.py:052  |  lj.pair_coeff.set('Solvent','W1' ,epsilon=0 , sigma=1.3144)
+polymer_brush.py:053  |  lj.pair_coeff.set('Solvent','W2' ,epsilon=0 , sigma=1.3144)
+polymer_brush.py:054  |  lj.pair_coeff.set('Solvent','Solvent' ,epsilon=1.0*tether_bulk , sigma=1.3144)
+polymer_brush.py:055  |  lj.pair_coeff.set('Solvent','B' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:056  |  lj.pair_coeff.set('Solvent','C' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:057  |  lj.pair_coeff.set('Solvent','CH3_W1' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:058  |  lj.pair_coeff.set('Solvent','CH3_W2' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:059  |  lj.pair_coeff.set('Solvent','SolvTail' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:060  |  lj.pair_coeff.set('B','B' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:061  |  lj.pair_coeff.set('C','C' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:062  |  lj.pair_coeff.set('B','C' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:063  |  lj.pair_coeff.set('B','CH3_W1' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:064  |  lj.pair_coeff.set('B','CH3_W2' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:065  |  lj.pair_coeff.set('C','CH3_W1' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:066  |  lj.pair_coeff.set('C','CH3_W2' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:067  |  lj.pair_coeff.set('CH3_W1','CH3_W1' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:068  |  lj.pair_coeff.set('CH3_W1','CH3_W2' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:069  |  lj.pair_coeff.set('CH3_W2' ,'CH3_W2' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:071  |  lj.pair_coeff.set('B','SolvTail' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:072  |  lj.pair_coeff.set('C','SolvTail' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:073  |  lj.pair_coeff.set('CH3_W1','SolvTail' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:074  |  lj.pair_coeff.set('CH3_W2','SolvTail' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:075  |  lj.pair_coeff.set('SolvTail' ,'SolvTail' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:077  |  lj.pair_coeff.set('B','C' ,epsilon=0.01 , sigma=2.62 , alpha=0.0)
+polymer_brush.py:078  |  lj.pair_coeff.set('W1','W2' ,epsilon=0.0 , sigma=1.0)
+polymer_brush.py:079  |  lj.pair_coeff.set('W1','W1' ,epsilon=0.0 , sigma=1.0)
+polymer_brush.py:080  |  lj.pair_coeff.set('W1','B' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:081  |  lj.pair_coeff.set('W1','C' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:082  |  lj.pair_coeff.set('W2','W2' ,epsilon=0.0 , sigma=1.0)
+polymer_brush.py:083  |  lj.pair_coeff.set('W2','B' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:084  |  lj.pair_coeff.set('W2','C' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:085  |  lj.pair_coeff.set('W1','CH3_W1' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:086  |  lj.pair_coeff.set('W1','CH3_W2' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:087  |  lj.pair_coeff.set('W1','SolvTail' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:088  |  lj.pair_coeff.set('W2','CH3_W1' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:089  |  lj.pair_coeff.set('W2','CH3_W2' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:090  |  lj.pair_coeff.set('W2','SolvTail' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:091  |  lj.pair_coeff.set('A','C' ,epsilon=0.0 , sigma=1.0 , alpha=0.0)
+polymer_brush.py:093  |  slj = pair.slj(r_cut= 1.3)
+notice(2): Notice: slj set d_max=2.0
+polymer_brush.py:094  |  slj.set_params(mode="shift")
+pair.py:886  |          pair.set_params(self, mode=mode);
+polymer_brush.py:095  |  slj.pair_coeff.set('W2','Solvent', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:096  |  slj.pair_coeff.set('W1','Solvent', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:097  |  slj.pair_coeff.set('Solvent','Solvent', epsilon = 0, sigma = 1.0)
+polymer_brush.py:098  |  slj.pair_coeff.set('Solvent','B', epsilon = 0, sigma = 1.0)
+polymer_brush.py:099  |  slj.pair_coeff.set('Solvent','C', epsilon = 0, sigma = 1.0)
+polymer_brush.py:100  |  slj.pair_coeff.set('Solvent','CH3_W1', epsilon = 0, sigma = 1.0)
+polymer_brush.py:101  |  slj.pair_coeff.set('Solvent','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:102  |  slj.pair_coeff.set('Solvent','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:103  |  slj.pair_coeff.set('W1','W2', epsilon = 0 , sigma =1.0)
+polymer_brush.py:104  |  slj.pair_coeff.set('W1','W1', epsilon = 0 , sigma =1.0)
+polymer_brush.py:105  |  slj.pair_coeff.set('W2','W2', epsilon = 0 , sigma =1.0)
+polymer_brush.py:106  |  slj.pair_coeff.set('W1','B', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:107  |  slj.pair_coeff.set('W1','C', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:108  |  slj.pair_coeff.set('W2','B', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:109  |  slj.pair_coeff.set('W2','C', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:110  |  slj.pair_coeff.set('W1','CH3_W1', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:111  |  slj.pair_coeff.set('W1','CH3_W2', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:112  |  slj.pair_coeff.set('W2','CH3_W1', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:113  |  slj.pair_coeff.set('W2','CH3_W2', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:114  |  slj.pair_coeff.set('W1','SolvTail', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:115  |  slj.pair_coeff.set('W2','SolvTail', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:116  |  slj.pair_coeff.set('B','B', epsilon = 0, sigma = 1.0)
+polymer_brush.py:117  |  slj.pair_coeff.set('C','C', epsilon = 0, sigma = 1.0)
+polymer_brush.py:118  |  slj.pair_coeff.set('B','C', epsilon = 0, sigma = 1.0)
+polymer_brush.py:119  |  slj.pair_coeff.set('B','CH3_W1', epsilon = 0, sigma = 1.0)
+polymer_brush.py:120  |  slj.pair_coeff.set('B','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:121  |  slj.pair_coeff.set('B','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:122  |  slj.pair_coeff.set('C','CH3_W1', epsilon = 0, sigma = 1.0)
+polymer_brush.py:123  |  slj.pair_coeff.set('C','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:124  |  slj.pair_coeff.set('C','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:125  |  slj.pair_coeff.set('CH3_W1','CH3_W1', epsilon = 0, sigma = 1.0)
+polymer_brush.py:126  |  slj.pair_coeff.set('CH3_W1','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:127  |  slj.pair_coeff.set('CH3_W2','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:128  |  slj.pair_coeff.set('CH3_W1','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:129  |  slj.pair_coeff.set('CH3_W2','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:130  |  slj.pair_coeff.set('SolvTail','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:133  |  harmonicO_O= bond.harmonic(name = 'O-O-bond')
+polymer_brush.py:135  |  harmonicO_O.bond_coeff.set('oleic', k=9892.9362 , r0=0.5)
+polymer_brush.py:138  |  harmonicO_O.bond_coeff.set('wall', k=9892.9362, r0=1.25)
+polymer_brush.py:141  |  angleWO = angle.harmonic()
+polymer_brush.py:142  |  angleWO.set_coeff('W-O' , k = 201.2878 , t0= 2.5307)
+polymer_brush.py:143  |  angleWO.set_coeff('O-O' , k = 201.2878 , t0= 1.92)
+polymer_brush.py:144  |  angleWO.set_coeff('kink' , k = 1000.2878 , t0= 2.8)
+polymer_brush.py:150  |  dihedralField = dihedral.harmonic()
+polymer_brush.py:151  |  dihedralField.set_coeff('DihedralW1' , k = 2.6838 , d=1 , n= 1)
+polymer_brush.py:152  |  dihedralField.set_coeff('DihedralW2' , k = 1.4543 , d=-1 , n= 2)
+polymer_brush.py:153  |  dihedralField.set_coeff('DihedralW3' , k =5.4347 , d=1 , n= 3)
+polymer_brush.py:154  |  dihedralField.set_coeff('Dihedral1' , k =2.6838 , d=1 , n= 1)
+polymer_brush.py:155  |  dihedralField.set_coeff('Dihedral2' , k = 1.4543 , d=-1 , n= 2)
+polymer_brush.py:156  |  dihedralField.set_coeff('Dihedral3' , k =5.4347 , d=1 , n= 3)
+polymer_brush.py:158  |  integrate.mode_standard(dt= 0.005)
+polymer_brush.py:160  |  integrator=integrate.nve(group=typeAll , limit=0.01 )
+polymer_brush.py:161  |  zeroer = update.zero_momentum(period = 1)
+polymer_brush.py:164  |  run(200)
+notice(2): -- Neighborlist exclusion statistics -- :
+notice(2): Particles with 1 exclusions             : 20480
+notice(2): Particles with 2 exclusions             : 90880
+notice(2): Neighbors included by diameter          : yes
+notice(2): Neighbors excluded when in the same body: no
+** starting run **
+Time 00:00:10 | Step 12 / 200 | TPS 1.17776 | ETA 00:02:39
+Time 00:00:21 | Step 43 / 200 | TPS 2.95032 | ETA 00:00:53
+Time 00:00:32 | Step 85 / 200 | TPS 3.72712 | ETA 00:00:30
+Time 00:00:42 | Step 122 / 200 | TPS 3.60012 | ETA 00:00:21
+Time 00:00:55 | Step 164 / 200 | TPS 3.33659 | ETA 00:00:10
+Time 00:01:05 | Step 200 / 200 | TPS 3.64406 | ETA 00:00:00
+Average TPS: 3.09075
+---------
+-- Neighborlist stats:
+8 normal updates / 2 forced updates / 0 dangerous updates
+n_neigh_min: 0 / n_neigh_max: 134 / n_neigh_avg: 46.0428
+shortest rebuild period: 21
+-- Cell list stats:
+Dimension: 20, 20, 5
+n_min    : 8 / n_max: 136 / n_avg: 52.288
+** run complete **
+polymer_brush.py:165  |  zeroer.disable()
+polymer_brush.py:167  |  integrator.disable()
+polymer_brush.py:169  |  integrator=integrate.npt(group=typeAll , tau=1.0 , T= 1.0 , tauP = 1.2 , P = 0.00078 , x=False , y = False , z = True , rescale_all=True )
+polymer_brush.py:172  |  run(5e2, profile=True, limit_hours=1)
+** starting run **
+Time 00:01:15 | Step 223 / 700 | TPS 2.25519 | ETA 00:03:31
+Time 00:01:27 | Step 248 / 700 | TPS 2.06091 | ETA 00:03:39
+Time 00:01:39 | Step 276 / 700 | TPS 2.4598 | ETA 00:02:52
+Time 00:01:49 | Step 299 / 700 | TPS 2.29997 | ETA 00:02:54
+Time 00:01:59 | Step 322 / 700 | TPS 2.27734 | ETA 00:02:45
+Time 00:02:12 | Step 345 / 700 | TPS 1.78898 | ETA 00:03:18
+Time 00:02:22 | Step 371 / 700 | TPS 2.40854 | ETA 00:02:16
+Time 00:02:33 | Step 396 / 700 | TPS 2.37257 | ETA 00:02:08
+Time 00:02:43 | Step 419 / 700 | TPS 2.28525 | ETA 00:02:02
+Time 00:02:53 | Step 442 / 700 | TPS 2.26876 | ETA 00:01:53
+Time 00:03:03 | Step 465 / 700 | TPS 2.28379 | ETA 00:01:42
+Time 00:03:14 | Step 487 / 700 | TPS 1.95702 | ETA 00:01:48
+Time 00:03:25 | Step 510 / 700 | TPS 2.28011 | ETA 00:01:23
+Time 00:03:35 | Step 534 / 700 | TPS 2.3445 | ETA 00:01:10
+Time 00:03:46 | Step 558 / 700 | TPS 2.07323 | ETA 00:01:08
+Time 00:03:57 | Step 582 / 700 | TPS 2.35081 | ETA 00:00:50
+Time 00:04:07 | Step 601 / 700 | TPS 1.83718 | ETA 00:00:53
+Time 00:04:17 | Step 625 / 700 | TPS 2.38 | ETA 00:00:31
+Time 00:04:27 | Step 644 / 700 | TPS 1.86161 | ETA 00:00:30
+Time 00:04:38 | Step 667 / 700 | TPS 2.05006 | ETA 00:00:16
+Time 00:04:50 | Step 691 / 700 | TPS 2.10836 | ETA 00:00:04
+Time 00:04:53 | Step 700 / 700 | TPS 2.50513 | ETA 00:00:00
+Average TPS: 2.18865
+Simulation: 228.4518s | 100.000% 
+        Bond harmonic:      1.8753s |  0.821% 
+        Harmonic Angle:     4.2355s |  1.854% 
+        Harmonic Dihedral: 11.5917s |  5.074% 
+        Integrate:          4.5085s |  1.973% 
+                NPT step 1:  1.0124s |  0.443% 
+                        Thermo:  0.0017s |  0.001% 
+                        Self:    1.0107s |  0.442% 
+                NPT step 2:  1.3062s |  0.572% 
+                        Thermo:  0.8217s |  0.360% 
+                        Self:    0.4845s |  0.212% 
+                Net force:   2.1766s |  0.953% 
+        Neighbor:          102.2741s | 44.768% 
+                Cell:        0.2752s |  0.120% 
+                        compute:  0.2724s |  0.119% 
+                        init:     0.0024s |  0.001% 
+                Dist check:  0.2503s |  0.110% 
+                        MPI allreduce:  0.0037s |  0.002% 
+                        Self:           0.2466s |  0.108% 
+                compute:    100.7475s | 44.100% 
+                filter:      0.9494s |  0.416% 
+                head-list:   0.0075s |  0.003% 
+                update-ex:   0.0422s |  0.018% 
+        Pair lj:           65.6430s | 28.734% 
+        Pair slj:          35.9272s | 15.726% 
+        SFCPack:            0.0715s |  0.031% 
+        comm_ghost_exch:    0.2550s |  0.112% 
+                MPI send/recv:  0.0185s |  0.008% 
+                Self:           0.2365s |  0.104% 
+        comm_ghost_update:  0.1085s |  0.048% 
+                MPI send/recv:  0.0422s |  0.018% 7.84035 GiB/s 
+        comm_migrate:       1.9383s |  0.848% 
+                MPI send/recv:  0.0008s |  0.000% 
+                angle:          0.2586s |  0.113% 
+                        MPI send/recv:  0.0008s |  0.000% 451.08257 MiB/s 
+                        Self:           0.2579s |  0.113% 
+                bond:           0.1769s |  0.077% 
+                        MPI send/recv:  0.0009s |  0.000% 198.78054 MiB/s 
+                dihedral:       1.0152s |  0.444% 
+                        MPI send/recv:  0.0010s |  0.000% 1.43708 GiB/s 
+                        Self:           1.0141s |  0.444% 
+                pack:           0.3493s |  0.153% 
+                unpack:         0.0120s |  0.005% 
+---------
+-- Neighborlist stats:
+63 normal updates / 5 forced updates / 0 dangerous updates
+n_neigh_min: 0 / n_neigh_max: 134 / n_neigh_avg: 46.77483
+shortest rebuild period: 6
+-- Cell list stats:
+Dimension: 20, 20, 5
+n_min    : 6 / n_max: 144 / n_avg: 51.48800
+** run complete **
+
+
+
+
+
+
+
+
+
+
+################################################################
+Running: mpirun -n 1 python polymer_brush.py --mode=cpu --user=8
+HOOMD-blue 1.3.3-unknown CUDA (7.5) SINGLE MPI SSE SSE2 SSE3 
+Compiled: 03/06/2016
+Copyright 2009-2016 The Regents of the University of Michigan.
+
+All publications and presentations based on HOOMD-blue, including any reports
+or published results obtained, in whole or in part, with HOOMD-blue, will
+acknowledge its use according to the terms posted at the time of submission on:
+http://codeblue.umich.edu/hoomd-blue/citations.html
+-----
+You are using HOOMD-blue. Read and cite the following:
+* J A Anderson, C D Lorenz, and A Travesset. "General purpose molecular dynamics
+  simulations fully implemented on graphics processing units", Journal of
+  Computational Physics 227 (2008) 5342--5359
+and
+* J Glaser, T D Nguyen, J A Anderson, P Liu, F Spiga, J A Millan, D C Morse, and
+  S C Glotzer. "Strong scaling of general-purpose molecular dynamics simulations
+  on GPUs", Computer Physics Communications 192 (2015) 97--107
+and
+* http://codeblue.umich.edu/hoomd-blue
+You can save these citations to file using cite.save().
+-----
+HOOMD-blue is running on the CPU
+polymer_brush.py:012  |  system=init.read_xml(filename='init.xml')
+notice(2): Reading init.xml...
+notice(2): --- hoomd_xml file read summary
+notice(2): 1740 positions at timestep 0
+notice(2): 1740 velocities
+notice(2): 1740 masses
+notice(2): 1740 diameters
+notice(2): 5 particle types
+notice(2): 1740 particle body values
+notice(2): 1580 bonds
+notice(2): 1420 angles
+notice(2): 3780 dihedrals
+notice(2): 1740 charges
+notice(2): Group "all" created containing 1740 particles
+polymer_brush.py:018  |  system.replicate(nx=rep, ny=rep, nz=1)
+polymer_brush.py:019  |  typeW1=group.type('W1')
+notice(2): Group "type W1" created containing 3840 particles
+polymer_brush.py:020  |  typeW2=group.type('W2')
+*Warning*: W2 does not exist in the system, creating an empty group
+notice(2): Group "type W2" created containing 0 particles
+notice(2): Group "Wall" created containing 3840 particles
+polymer_brush.py:022  |  typeB= group.type('B')
+notice(2): Group "type B" created containing 65280 particles
+polymer_brush.py:023  |  typeSolvBackBone = group.type('Solvent')
+notice(2): Group "type Solvent" created containing 25600 particles
+polymer_brush.py:024  |  typeC= group.type('C')
+*Warning*: C does not exist in the system, creating an empty group
+notice(2): Group "type C" created containing 0 particles
+polymer_brush.py:025  |  typeCH3_W1=group.type('CH3_W1')
+notice(2): Group "type CH3_W1" created containing 3840 particles
+polymer_brush.py:026  |  typeCH3_W2=group.type('CH3_W2')
+*Warning*: CH3_W2 does not exist in the system, creating an empty group
+notice(2): Group "type CH3_W2" created containing 0 particles
+polymer_brush.py:027  |  typeSolvTail=group.type('SolvTail')
+notice(2): Group "type SolvTail" created containing 12800 particles
+notice(2): Group "BCH3-particles" created containing 69120 particles
+notice(2): Group "CCH3-particles" created containing 0 particles
+notice(2): Group "all-solvent" created containing 38400 particles
+notice(2): Group "bc-particles" created containing 69120 particles
+notice(2): Group "typeAll" created containing 107520 particles
+notice(2): Group "typeNPT" created containing 111360 particles
+Number of polymeric particles 107520
+polymer_brush.py:044  |  lj = pair.lj(r_cut=3.3)
+nlist.py:1051  |          globals.neighbor_list = cell();
+polymer_brush.py:052  |  lj.pair_coeff.set('Solvent','W1' ,epsilon=0 , sigma=1.3144)
+polymer_brush.py:053  |  lj.pair_coeff.set('Solvent','W2' ,epsilon=0 , sigma=1.3144)
+polymer_brush.py:054  |  lj.pair_coeff.set('Solvent','Solvent' ,epsilon=1.0*tether_bulk , sigma=1.3144)
+polymer_brush.py:055  |  lj.pair_coeff.set('Solvent','B' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:056  |  lj.pair_coeff.set('Solvent','C' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:057  |  lj.pair_coeff.set('Solvent','CH3_W1' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:058  |  lj.pair_coeff.set('Solvent','CH3_W2' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:059  |  lj.pair_coeff.set('Solvent','SolvTail' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:060  |  lj.pair_coeff.set('B','B' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:061  |  lj.pair_coeff.set('C','C' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:062  |  lj.pair_coeff.set('B','C' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:063  |  lj.pair_coeff.set('B','CH3_W1' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:064  |  lj.pair_coeff.set('B','CH3_W2' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:065  |  lj.pair_coeff.set('C','CH3_W1' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:066  |  lj.pair_coeff.set('C','CH3_W2' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:067  |  lj.pair_coeff.set('CH3_W1','CH3_W1' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:068  |  lj.pair_coeff.set('CH3_W1','CH3_W2' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:069  |  lj.pair_coeff.set('CH3_W2' ,'CH3_W2' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:071  |  lj.pair_coeff.set('B','SolvTail' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:072  |  lj.pair_coeff.set('C','SolvTail' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:073  |  lj.pair_coeff.set('CH3_W1','SolvTail' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:074  |  lj.pair_coeff.set('CH3_W2','SolvTail' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:075  |  lj.pair_coeff.set('SolvTail' ,'SolvTail' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:077  |  lj.pair_coeff.set('B','C' ,epsilon=0.01 , sigma=2.62 , alpha=0.0)
+polymer_brush.py:078  |  lj.pair_coeff.set('W1','W2' ,epsilon=0.0 , sigma=1.0)
+polymer_brush.py:079  |  lj.pair_coeff.set('W1','W1' ,epsilon=0.0 , sigma=1.0)
+polymer_brush.py:080  |  lj.pair_coeff.set('W1','B' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:081  |  lj.pair_coeff.set('W1','C' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:082  |  lj.pair_coeff.set('W2','W2' ,epsilon=0.0 , sigma=1.0)
+polymer_brush.py:083  |  lj.pair_coeff.set('W2','B' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:084  |  lj.pair_coeff.set('W2','C' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:085  |  lj.pair_coeff.set('W1','CH3_W1' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:086  |  lj.pair_coeff.set('W1','CH3_W2' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:087  |  lj.pair_coeff.set('W1','SolvTail' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:088  |  lj.pair_coeff.set('W2','CH3_W1' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:089  |  lj.pair_coeff.set('W2','CH3_W2' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:090  |  lj.pair_coeff.set('W2','SolvTail' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:091  |  lj.pair_coeff.set('A','C' ,epsilon=0.0 , sigma=1.0 , alpha=0.0)
+polymer_brush.py:093  |  slj = pair.slj(r_cut= 1.3)
+notice(2): Notice: slj set d_max=2.0
+polymer_brush.py:094  |  slj.set_params(mode="shift")
+pair.py:886  |          pair.set_params(self, mode=mode);
+polymer_brush.py:095  |  slj.pair_coeff.set('W2','Solvent', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:096  |  slj.pair_coeff.set('W1','Solvent', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:097  |  slj.pair_coeff.set('Solvent','Solvent', epsilon = 0, sigma = 1.0)
+polymer_brush.py:098  |  slj.pair_coeff.set('Solvent','B', epsilon = 0, sigma = 1.0)
+polymer_brush.py:099  |  slj.pair_coeff.set('Solvent','C', epsilon = 0, sigma = 1.0)
+polymer_brush.py:100  |  slj.pair_coeff.set('Solvent','CH3_W1', epsilon = 0, sigma = 1.0)
+polymer_brush.py:101  |  slj.pair_coeff.set('Solvent','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:102  |  slj.pair_coeff.set('Solvent','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:103  |  slj.pair_coeff.set('W1','W2', epsilon = 0 , sigma =1.0)
+polymer_brush.py:104  |  slj.pair_coeff.set('W1','W1', epsilon = 0 , sigma =1.0)
+polymer_brush.py:105  |  slj.pair_coeff.set('W2','W2', epsilon = 0 , sigma =1.0)
+polymer_brush.py:106  |  slj.pair_coeff.set('W1','B', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:107  |  slj.pair_coeff.set('W1','C', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:108  |  slj.pair_coeff.set('W2','B', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:109  |  slj.pair_coeff.set('W2','C', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:110  |  slj.pair_coeff.set('W1','CH3_W1', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:111  |  slj.pair_coeff.set('W1','CH3_W2', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:112  |  slj.pair_coeff.set('W2','CH3_W1', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:113  |  slj.pair_coeff.set('W2','CH3_W2', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:114  |  slj.pair_coeff.set('W1','SolvTail', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:115  |  slj.pair_coeff.set('W2','SolvTail', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:116  |  slj.pair_coeff.set('B','B', epsilon = 0, sigma = 1.0)
+polymer_brush.py:117  |  slj.pair_coeff.set('C','C', epsilon = 0, sigma = 1.0)
+polymer_brush.py:118  |  slj.pair_coeff.set('B','C', epsilon = 0, sigma = 1.0)
+polymer_brush.py:119  |  slj.pair_coeff.set('B','CH3_W1', epsilon = 0, sigma = 1.0)
+polymer_brush.py:120  |  slj.pair_coeff.set('B','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:121  |  slj.pair_coeff.set('B','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:122  |  slj.pair_coeff.set('C','CH3_W1', epsilon = 0, sigma = 1.0)
+polymer_brush.py:123  |  slj.pair_coeff.set('C','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:124  |  slj.pair_coeff.set('C','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:125  |  slj.pair_coeff.set('CH3_W1','CH3_W1', epsilon = 0, sigma = 1.0)
+polymer_brush.py:126  |  slj.pair_coeff.set('CH3_W1','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:127  |  slj.pair_coeff.set('CH3_W2','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:128  |  slj.pair_coeff.set('CH3_W1','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:129  |  slj.pair_coeff.set('CH3_W2','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:130  |  slj.pair_coeff.set('SolvTail','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:133  |  harmonicO_O= bond.harmonic(name = 'O-O-bond')
+polymer_brush.py:135  |  harmonicO_O.bond_coeff.set('oleic', k=9892.9362 , r0=0.5)
+polymer_brush.py:138  |  harmonicO_O.bond_coeff.set('wall', k=9892.9362, r0=1.25)
+polymer_brush.py:141  |  angleWO = angle.harmonic()
+polymer_brush.py:142  |  angleWO.set_coeff('W-O' , k = 201.2878 , t0= 2.5307)
+polymer_brush.py:143  |  angleWO.set_coeff('O-O' , k = 201.2878 , t0= 1.92)
+polymer_brush.py:144  |  angleWO.set_coeff('kink' , k = 1000.2878 , t0= 2.8)
+polymer_brush.py:150  |  dihedralField = dihedral.harmonic()
+polymer_brush.py:151  |  dihedralField.set_coeff('DihedralW1' , k = 2.6838 , d=1 , n= 1)
+polymer_brush.py:152  |  dihedralField.set_coeff('DihedralW2' , k = 1.4543 , d=-1 , n= 2)
+polymer_brush.py:153  |  dihedralField.set_coeff('DihedralW3' , k =5.4347 , d=1 , n= 3)
+polymer_brush.py:154  |  dihedralField.set_coeff('Dihedral1' , k =2.6838 , d=1 , n= 1)
+polymer_brush.py:155  |  dihedralField.set_coeff('Dihedral2' , k = 1.4543 , d=-1 , n= 2)
+polymer_brush.py:156  |  dihedralField.set_coeff('Dihedral3' , k =5.4347 , d=1 , n= 3)
+polymer_brush.py:158  |  integrate.mode_standard(dt= 0.005)
+polymer_brush.py:160  |  integrator=integrate.nve(group=typeAll , limit=0.01 )
+polymer_brush.py:161  |  zeroer = update.zero_momentum(period = 1)
+polymer_brush.py:164  |  run(200)
+notice(2): -- Neighborlist exclusion statistics -- :
+notice(2): Particles with 1 exclusions             : 20480
+notice(2): Particles with 2 exclusions             : 90880
+notice(2): Neighbors included by diameter          : yes
+notice(2): Neighbors excluded when in the same body: no
+** starting run **
+Time 00:00:10 | Step 18 / 200 | TPS 1.76917 | ETA 00:01:42
+Time 00:00:20 | Step 45 / 200 | TPS 2.67414 | ETA 00:00:57
+Time 00:00:32 | Step 85 / 200 | TPS 3.47285 | ETA 00:00:33
+Time 00:00:42 | Step 122 / 200 | TPS 3.52163 | ETA 00:00:22
+Time 00:00:54 | Step 164 / 200 | TPS 3.67112 | ETA 00:00:09
+Time 00:01:04 | Step 200 / 200 | TPS 3.54739 | ETA 00:00:00
+Average TPS: 3.13065
+---------
+-- Neighborlist stats:
+8 normal updates / 2 forced updates / 0 dangerous updates
+n_neigh_min: 0 / n_neigh_max: 131 / n_neigh_avg: 41.9976
+shortest rebuild period: 21
+-- Cell list stats:
+Dimension: 20, 20, 8
+n_min    : 0 / n_max: 119 / n_avg: 34.8
+** run complete **
+polymer_brush.py:165  |  zeroer.disable()
+polymer_brush.py:167  |  integrator.disable()
+polymer_brush.py:169  |  integrator=integrate.npt(group=typeAll , tau=1.0 , T= 1.0 , tauP = 1.2 , P = 0.00078 , x=False , y = False , z = True , rescale_all=True )
+polymer_brush.py:172  |  run(5e2, profile=True, limit_hours=1)
+** starting run **
+Time 00:01:15 | Step 220 / 700 | TPS 1.8013 | ETA 00:04:26
+Time 00:01:25 | Step 248 / 700 | TPS 2.76884 | ETA 00:02:43
+Time 00:01:36 | Step 268 / 700 | TPS 1.79185 | ETA 00:04:01
+Time 00:01:47 | Step 293 / 700 | TPS 2.29282 | ETA 00:02:57
+Time 00:01:57 | Step 315 / 700 | TPS 2.16464 | ETA 00:02:57
+Time 00:02:08 | Step 337 / 700 | TPS 2.16453 | ETA 00:02:47
+Time 00:02:18 | Step 362 / 700 | TPS 2.27676 | ETA 00:02:28
+Time 00:02:30 | Step 387 / 700 | TPS 2.26512 | ETA 00:02:18
+Time 00:02:40 | Step 409 / 700 | TPS 2.15995 | ETA 00:02:14
+Time 00:02:50 | Step 431 / 700 | TPS 2.16759 | ETA 00:02:04
+Time 00:03:00 | Step 453 / 700 | TPS 2.17765 | ETA 00:01:53
+Time 00:03:10 | Step 475 / 700 | TPS 2.16896 | ETA 00:01:43
+Time 00:03:20 | Step 498 / 700 | TPS 2.24327 | ETA 00:01:30
+Time 00:03:31 | Step 516 / 700 | TPS 1.76155 | ETA 00:01:44
+Time 00:03:41 | Step 539 / 700 | TPS 2.28998 | ETA 00:01:10
+Time 00:03:51 | Step 562 / 700 | TPS 2.2901 | ETA 00:01:00
+Time 00:04:02 | Step 583 / 700 | TPS 1.90864 | ETA 00:01:01
+Time 00:04:12 | Step 606 / 700 | TPS 2.27053 | ETA 00:00:41
+Time 00:04:23 | Step 627 / 700 | TPS 1.91953 | ETA 00:00:38
+Time 00:04:33 | Step 650 / 700 | TPS 2.29598 | ETA 00:00:21
+Time 00:04:43 | Step 669 / 700 | TPS 1.83308 | ETA 00:00:16
+Time 00:04:53 | Step 693 / 700 | TPS 2.34299 | ETA 00:00:02
+Time 00:04:58 | Step 700 / 700 | TPS 1.53635 | ETA 00:00:00
+Average TPS: 2.13658
+Simulation: 234.0192s | 100.000% 
+        Bond harmonic:      2.0110s |  0.859% 
+        Harmonic Angle:     4.5519s |  1.945% 
+        Harmonic Dihedral: 12.5420s |  5.359% 
+        Integrate:          5.2031s |  2.223% 
+                NPT step 1:  1.1514s |  0.492% 
+                        Thermo:  0.0019s |  0.001% 
+                        Self:    1.1495s |  0.491% 
+                NPT step 2:  1.4610s |  0.624% 
+                        Thermo:  0.9277s |  0.396% 
+                        Self:    0.5333s |  0.228% 
+                Net force:   2.5870s |  1.105% 
+        Neighbor:          106.1114s | 45.343% 
+                Cell:        0.2919s |  0.125% 
+                        compute:  0.2852s |  0.122% 
+                        init:     0.0059s |  0.003% 
+                Dist check:  0.3071s |  0.131% 
+                compute:    104.5150s | 44.661% 
+                filter:      0.9900s |  0.423% 
+                head-list:   0.0010s |  0.000% 
+                update-ex:   0.0047s |  0.002% 
+        Pair lj:           67.1182s | 28.681% 
+        Pair slj:          36.3723s | 15.542% 
+        SFCPack:            0.0979s |  0.042% 
+---------
+-- Neighborlist stats:
+64 normal updates / 5 forced updates / 0 dangerous updates
+n_neigh_min: 0 / n_neigh_max: 133 / n_neigh_avg: 41.92534
+shortest rebuild period: 6
+-- Cell list stats:
+Dimension: 20, 20, 9
+n_min    : 0 / n_max: 122 / n_avg: 30.93333
+** run complete **
+
+
+
+
+
+
+
+
+
+
+################################################################
+CPU n=16
+################################################################
+################################################################
+Running: mpirun -n 16 python polymer_brush.py --mode=cpu --user=16
+HOOMD-blue 1.3.3-unknown CUDA (7.5) SINGLE MPI SSE SSE2 SSE3 
+Compiled: 03/06/2016
+Copyright 2009-2016 The Regents of the University of Michigan.
+
+All publications and presentations based on HOOMD-blue, including any reports
+or published results obtained, in whole or in part, with HOOMD-blue, will
+acknowledge its use according to the terms posted at the time of submission on:
+http://codeblue.umich.edu/hoomd-blue/citations.html
+-----
+You are using HOOMD-blue. Read and cite the following:
+* J A Anderson, C D Lorenz, and A Travesset. "General purpose molecular dynamics
+  simulations fully implemented on graphics processing units", Journal of
+  Computational Physics 227 (2008) 5342--5359
+and
+* J Glaser, T D Nguyen, J A Anderson, P Liu, F Spiga, J A Millan, D C Morse, and
+  S C Glotzer. "Strong scaling of general-purpose molecular dynamics simulations
+  on GPUs", Computer Physics Communications 192 (2015) 97--107
+and
+* http://codeblue.umich.edu/hoomd-blue
+You can save these citations to file using cite.save().
+-----
+Ranks 0-15: HOOMD-blue is running on the CPU
+polymer_brush.py:012  |  system=init.read_xml(filename='init.xml')
+notice(2): Reading init.xml...
+notice(2): --- hoomd_xml file read summary
+notice(2): 1740 positions at timestep 0
+notice(2): 1740 velocities
+notice(2): 1740 masses
+notice(2): 1740 diameters
+notice(2): 5 particle types
+notice(2): 1740 particle body values
+notice(2): 1580 bonds
+notice(2): 1420 angles
+notice(2): 3780 dihedrals
+notice(2): 1740 charges
+HOOMD-blue is using domain decomposition: n_x = 2 n_y = 2 n_z = 4.
+2 x 2 x 4 local grid on 1 nodes
+notice(2): Group "all" created containing 1740 particles
+polymer_brush.py:018  |  system.replicate(nx=rep, ny=rep, nz=1)
+polymer_brush.py:019  |  typeW1=group.type('W1')
+notice(2): Group "type W1" created containing 15360 particles
+polymer_brush.py:020  |  typeW2=group.type('W2')
+*Warning*: W2 does not exist in the system, creating an empty group
+notice(2): Group "type W2" created containing 0 particles
+notice(2): Group "Wall" created containing 15360 particles
+polymer_brush.py:022  |  typeB= group.type('B')
+notice(2): Group "type B" created containing 261120 particles
+polymer_brush.py:023  |  typeSolvBackBone = group.type('Solvent')
+notice(2): Group "type Solvent" created containing 102400 particles
+polymer_brush.py:024  |  typeC= group.type('C')
+*Warning*: C does not exist in the system, creating an empty group
+notice(2): Group "type C" created containing 0 particles
+polymer_brush.py:025  |  typeCH3_W1=group.type('CH3_W1')
+notice(2): Group "type CH3_W1" created containing 15360 particles
+polymer_brush.py:026  |  typeCH3_W2=group.type('CH3_W2')
+*Warning*: CH3_W2 does not exist in the system, creating an empty group
+notice(2): Group "type CH3_W2" created containing 0 particles
+polymer_brush.py:027  |  typeSolvTail=group.type('SolvTail')
+notice(2): Group "type SolvTail" created containing 51200 particles
+notice(2): Group "BCH3-particles" created containing 276480 particles
+notice(2): Group "CCH3-particles" created containing 0 particles
+notice(2): Group "all-solvent" created containing 153600 particles
+notice(2): Group "bc-particles" created containing 276480 particles
+notice(2): Group "typeAll" created containing 430080 particles
+notice(2): Group "typeNPT" created containing 445440 particles
+Number of polymeric particles 430080
+polymer_brush.py:044  |  lj = pair.lj(r_cut=3.3)
+nlist.py:1051  |          globals.neighbor_list = cell();
+polymer_brush.py:052  |  lj.pair_coeff.set('Solvent','W1' ,epsilon=0 , sigma=1.3144)
+polymer_brush.py:053  |  lj.pair_coeff.set('Solvent','W2' ,epsilon=0 , sigma=1.3144)
+polymer_brush.py:054  |  lj.pair_coeff.set('Solvent','Solvent' ,epsilon=1.0*tether_bulk , sigma=1.3144)
+polymer_brush.py:055  |  lj.pair_coeff.set('Solvent','B' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:056  |  lj.pair_coeff.set('Solvent','C' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:057  |  lj.pair_coeff.set('Solvent','CH3_W1' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:058  |  lj.pair_coeff.set('Solvent','CH3_W2' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:059  |  lj.pair_coeff.set('Solvent','SolvTail' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:060  |  lj.pair_coeff.set('B','B' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:061  |  lj.pair_coeff.set('C','C' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:062  |  lj.pair_coeff.set('B','C' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:063  |  lj.pair_coeff.set('B','CH3_W1' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:064  |  lj.pair_coeff.set('B','CH3_W2' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:065  |  lj.pair_coeff.set('C','CH3_W1' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:066  |  lj.pair_coeff.set('C','CH3_W2' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:067  |  lj.pair_coeff.set('CH3_W1','CH3_W1' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:068  |  lj.pair_coeff.set('CH3_W1','CH3_W2' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:069  |  lj.pair_coeff.set('CH3_W2' ,'CH3_W2' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:071  |  lj.pair_coeff.set('B','SolvTail' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:072  |  lj.pair_coeff.set('C','SolvTail' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:073  |  lj.pair_coeff.set('CH3_W1','SolvTail' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:074  |  lj.pair_coeff.set('CH3_W2','SolvTail' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:075  |  lj.pair_coeff.set('SolvTail' ,'SolvTail' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:077  |  lj.pair_coeff.set('B','C' ,epsilon=0.01 , sigma=2.62 , alpha=0.0)
+polymer_brush.py:078  |  lj.pair_coeff.set('W1','W2' ,epsilon=0.0 , sigma=1.0)
+polymer_brush.py:079  |  lj.pair_coeff.set('W1','W1' ,epsilon=0.0 , sigma=1.0)
+polymer_brush.py:080  |  lj.pair_coeff.set('W1','B' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:081  |  lj.pair_coeff.set('W1','C' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:082  |  lj.pair_coeff.set('W2','W2' ,epsilon=0.0 , sigma=1.0)
+polymer_brush.py:083  |  lj.pair_coeff.set('W2','B' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:084  |  lj.pair_coeff.set('W2','C' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:085  |  lj.pair_coeff.set('W1','CH3_W1' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:086  |  lj.pair_coeff.set('W1','CH3_W2' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:087  |  lj.pair_coeff.set('W1','SolvTail' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:088  |  lj.pair_coeff.set('W2','CH3_W1' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:089  |  lj.pair_coeff.set('W2','CH3_W2' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:090  |  lj.pair_coeff.set('W2','SolvTail' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:091  |  lj.pair_coeff.set('A','C' ,epsilon=0.0 , sigma=1.0 , alpha=0.0)
+polymer_brush.py:093  |  slj = pair.slj(r_cut= 1.3)
+notice(2): Notice: slj set d_max=2.0
+polymer_brush.py:094  |  slj.set_params(mode="shift")
+pair.py:886  |          pair.set_params(self, mode=mode);
+polymer_brush.py:095  |  slj.pair_coeff.set('W2','Solvent', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:096  |  slj.pair_coeff.set('W1','Solvent', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:097  |  slj.pair_coeff.set('Solvent','Solvent', epsilon = 0, sigma = 1.0)
+polymer_brush.py:098  |  slj.pair_coeff.set('Solvent','B', epsilon = 0, sigma = 1.0)
+polymer_brush.py:099  |  slj.pair_coeff.set('Solvent','C', epsilon = 0, sigma = 1.0)
+polymer_brush.py:100  |  slj.pair_coeff.set('Solvent','CH3_W1', epsilon = 0, sigma = 1.0)
+polymer_brush.py:101  |  slj.pair_coeff.set('Solvent','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:102  |  slj.pair_coeff.set('Solvent','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:103  |  slj.pair_coeff.set('W1','W2', epsilon = 0 , sigma =1.0)
+polymer_brush.py:104  |  slj.pair_coeff.set('W1','W1', epsilon = 0 , sigma =1.0)
+polymer_brush.py:105  |  slj.pair_coeff.set('W2','W2', epsilon = 0 , sigma =1.0)
+polymer_brush.py:106  |  slj.pair_coeff.set('W1','B', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:107  |  slj.pair_coeff.set('W1','C', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:108  |  slj.pair_coeff.set('W2','B', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:109  |  slj.pair_coeff.set('W2','C', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:110  |  slj.pair_coeff.set('W1','CH3_W1', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:111  |  slj.pair_coeff.set('W1','CH3_W2', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:112  |  slj.pair_coeff.set('W2','CH3_W1', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:113  |  slj.pair_coeff.set('W2','CH3_W2', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:114  |  slj.pair_coeff.set('W1','SolvTail', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:115  |  slj.pair_coeff.set('W2','SolvTail', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:116  |  slj.pair_coeff.set('B','B', epsilon = 0, sigma = 1.0)
+polymer_brush.py:117  |  slj.pair_coeff.set('C','C', epsilon = 0, sigma = 1.0)
+polymer_brush.py:118  |  slj.pair_coeff.set('B','C', epsilon = 0, sigma = 1.0)
+polymer_brush.py:119  |  slj.pair_coeff.set('B','CH3_W1', epsilon = 0, sigma = 1.0)
+polymer_brush.py:120  |  slj.pair_coeff.set('B','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:121  |  slj.pair_coeff.set('B','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:122  |  slj.pair_coeff.set('C','CH3_W1', epsilon = 0, sigma = 1.0)
+polymer_brush.py:123  |  slj.pair_coeff.set('C','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:124  |  slj.pair_coeff.set('C','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:125  |  slj.pair_coeff.set('CH3_W1','CH3_W1', epsilon = 0, sigma = 1.0)
+polymer_brush.py:126  |  slj.pair_coeff.set('CH3_W1','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:127  |  slj.pair_coeff.set('CH3_W2','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:128  |  slj.pair_coeff.set('CH3_W1','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:129  |  slj.pair_coeff.set('CH3_W2','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:130  |  slj.pair_coeff.set('SolvTail','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:133  |  harmonicO_O= bond.harmonic(name = 'O-O-bond')
+polymer_brush.py:135  |  harmonicO_O.bond_coeff.set('oleic', k=9892.9362 , r0=0.5)
+polymer_brush.py:138  |  harmonicO_O.bond_coeff.set('wall', k=9892.9362, r0=1.25)
+polymer_brush.py:141  |  angleWO = angle.harmonic()
+polymer_brush.py:142  |  angleWO.set_coeff('W-O' , k = 201.2878 , t0= 2.5307)
+polymer_brush.py:143  |  angleWO.set_coeff('O-O' , k = 201.2878 , t0= 1.92)
+polymer_brush.py:144  |  angleWO.set_coeff('kink' , k = 1000.2878 , t0= 2.8)
+polymer_brush.py:150  |  dihedralField = dihedral.harmonic()
+polymer_brush.py:151  |  dihedralField.set_coeff('DihedralW1' , k = 2.6838 , d=1 , n= 1)
+polymer_brush.py:152  |  dihedralField.set_coeff('DihedralW2' , k = 1.4543 , d=-1 , n= 2)
+polymer_brush.py:153  |  dihedralField.set_coeff('DihedralW3' , k =5.4347 , d=1 , n= 3)
+polymer_brush.py:154  |  dihedralField.set_coeff('Dihedral1' , k =2.6838 , d=1 , n= 1)
+polymer_brush.py:155  |  dihedralField.set_coeff('Dihedral2' , k = 1.4543 , d=-1 , n= 2)
+polymer_brush.py:156  |  dihedralField.set_coeff('Dihedral3' , k =5.4347 , d=1 , n= 3)
+polymer_brush.py:158  |  integrate.mode_standard(dt= 0.005)
+polymer_brush.py:160  |  integrator=integrate.nve(group=typeAll , limit=0.01 )
+polymer_brush.py:161  |  zeroer = update.zero_momentum(period = 1)
+polymer_brush.py:164  |  run(200)
+notice(2): -- Neighborlist exclusion statistics -- :
+notice(2): Particles with 1 exclusions             : 81920
+notice(2): Particles with 2 exclusions             : 363520
+notice(2): Neighbors included by diameter          : yes
+notice(2): Neighbors excluded when in the same body: no
+** starting run **
+Time 00:00:12 | Step 18 / 200 | TPS 1.77657 | ETA 00:01:42
+Time 00:00:22 | Step 52 / 200 | TPS 3.38991 | ETA 00:00:43
+Time 00:00:32 | Step 93 / 200 | TPS 4.06423 | ETA 00:00:26
+Time 00:00:42 | Step 134 / 200 | TPS 4.05145 | ETA 00:00:16
+Time 00:00:52 | Step 169 / 200 | TPS 3.49905 | ETA 00:00:08
+Time 00:01:00 | Step 200 / 200 | TPS 3.83272 | ETA 00:00:00
+Average TPS: 3.42111
+---------
+-- Neighborlist stats:
+8 normal updates / 2 forced updates / 0 dangerous updates
+n_neigh_min: 0 / n_neigh_max: 133 / n_neigh_avg: 56.9452
+shortest rebuild period: 21
+-- Cell list stats:
+Dimension: 21, 21, 3
+n_min    : 8 / n_max: 189 / n_avg: 74.7082
+** run complete **
+polymer_brush.py:165  |  zeroer.disable()
+polymer_brush.py:167  |  integrator.disable()
+polymer_brush.py:169  |  integrator=integrate.npt(group=typeAll , tau=1.0 , T= 1.0 , tauP = 1.2 , P = 0.00078 , x=False , y = False , z = True , rescale_all=True )
+polymer_brush.py:172  |  run(5e2, profile=True, limit_hours=1)
+** starting run **
+Time 00:01:10 | Step 222 / 700 | TPS 2.18191 | ETA 00:03:39
+Time 00:01:20 | Step 249 / 700 | TPS 2.69269 | ETA 00:02:47
+Time 00:01:30 | Step 276 / 700 | TPS 2.68995 | ETA 00:02:37
+Time 00:01:41 | Step 301 / 700 | TPS 2.29571 | ETA 00:02:53
+Time 00:01:51 | Step 328 / 700 | TPS 2.68131 | ETA 00:02:18
+Time 00:02:01 | Step 350 / 700 | TPS 2.19279 | ETA 00:02:39
+Time 00:02:12 | Step 373 / 700 | TPS 2.23906 | ETA 00:02:26
+Time 00:02:22 | Step 400 / 700 | TPS 2.67736 | ETA 00:01:52
+Time 00:02:33 | Step 422 / 700 | TPS 1.94399 | ETA 00:02:23
+Time 00:02:44 | Step 449 / 700 | TPS 2.3943 | ETA 00:01:44
+Time 00:02:55 | Step 470 / 700 | TPS 1.92936 | ETA 00:01:59
+Time 00:03:05 | Step 493 / 700 | TPS 2.25602 | ETA 00:01:31
+Time 00:03:16 | Step 511 / 700 | TPS 1.76036 | ETA 00:01:47
+Time 00:03:28 | Step 532 / 700 | TPS 1.74207 | ETA 00:01:36
+Time 00:03:38 | Step 555 / 700 | TPS 2.26227 | ETA 00:01:04
+Time 00:03:50 | Step 575 / 700 | TPS 1.69372 | ETA 00:01:13
+Time 00:04:00 | Step 598 / 700 | TPS 2.26738 | ETA 00:00:44
+Time 00:04:11 | Step 613 / 700 | TPS 1.4053 | ETA 00:01:01
+Time 00:04:21 | Step 636 / 700 | TPS 2.25144 | ETA 00:00:28
+Time 00:04:31 | Step 660 / 700 | TPS 2.29854 | ETA 00:00:17
+Time 00:04:43 | Step 683 / 700 | TPS 2.02868 | ETA 00:00:08
+Time 00:04:50 | Step 700 / 700 | TPS 2.21042 | ETA 00:00:00
+Average TPS: 2.1746
+Simulation: 229.9272s | 100.000% 
+        Bond harmonic:      1.7807s |  0.774% 
+        Harmonic Angle:     3.8583s |  1.678% 
+        Harmonic Dihedral: 10.3525s |  4.503% 
+        Integrate:         17.3259s |  7.535% 
+                NPT step 1:  0.6780s |  0.295% 
+                        Thermo:  0.0013s |  0.001% 
+                        Self:    0.6767s |  0.294% 
+                NPT step 2: 14.6995s |  6.393% 
+                        Thermo:  0.6437s |  0.280% 
+                        Self:   14.0558s |  6.113% 
+                Net force:   1.9335s |  0.841% 
+        Neighbor:          92.7656s | 40.346% 
+                Cell:        0.3287s |  0.143% 
+                        compute:  0.3263s |  0.142% 
+                        init:     0.0020s |  0.001% 
+                Dist check:  0.1903s |  0.083% 
+                        MPI allreduce:  0.0230s |  0.010% 
+                compute:    91.1892s | 39.660% 
+                filter:      0.9989s |  0.434% 
+                head-list:   0.0112s |  0.005% 
+                update-ex:   0.0453s |  0.020% 
+        Pair lj:           62.4571s | 27.164% 
+        Pair slj:          34.1684s | 14.861% 
+        SFCPack:            0.0625s |  0.027% 
+        comm_ghost_exch:    0.4466s |  0.194% 
+                MPI send/recv:  0.1068s |  0.046% 
+                Self:           0.3398s |  0.148% 
+        comm_ghost_update:  0.4569s |  0.199% 
+                MPI send/recv:  0.2518s |  0.110% 3.13053 GiB/s 
+        comm_migrate:       6.2183s |  2.704% 
+                MPI send/recv:  0.0194s |  0.008% 
+                angle:          0.7865s |  0.342% 
+                        MPI send/recv:  0.0282s |  0.012% 39.59319 MiB/s 
+                        Self:           0.7583s |  0.330% 
+                bond:           0.5564s |  0.242% 
+                        MPI send/recv:  0.0489s |  0.021% 11.08135 MiB/s 
+                        Self:           0.5075s |  0.221% 
+                dihedral:       3.2516s |  1.414% 
+                        MPI send/recv:  0.0656s |  0.029% 86.53322 MiB/s 
+                        Self:           3.1860s |  1.386% 
+                pack:           1.2302s |  0.535% 
+                unpack:         0.0351s |  0.015% 
+                Self:           0.3392s |  0.148% 
+---------
+-- Neighborlist stats:
+70 normal updates / 5 forced updates / 0 dangerous updates
+n_neigh_min: 0 / n_neigh_max: 136 / n_neigh_avg: 56.47697
+shortest rebuild period: 5
+-- Cell list stats:
+Dimension: 21, 21, 3
+n_min    : 8 / n_max: 182 / n_avg: 72.63795
+** run complete **
+
+
+
+
+
+
+
+
+
+
+################################################################
+Running: mpirun -n 8 python polymer_brush.py --mode=cpu --user=16
+HOOMD-blue 1.3.3-unknown CUDA (7.5) SINGLE MPI SSE SSE2 SSE3 
+Compiled: 03/06/2016
+Copyright 2009-2016 The Regents of the University of Michigan.
+
+All publications and presentations based on HOOMD-blue, including any reports
+or published results obtained, in whole or in part, with HOOMD-blue, will
+acknowledge its use according to the terms posted at the time of submission on:
+http://codeblue.umich.edu/hoomd-blue/citations.html
+-----
+You are using HOOMD-blue. Read and cite the following:
+* J A Anderson, C D Lorenz, and A Travesset. "General purpose molecular dynamics
+  simulations fully implemented on graphics processing units", Journal of
+  Computational Physics 227 (2008) 5342--5359
+and
+* J Glaser, T D Nguyen, J A Anderson, P Liu, F Spiga, J A Millan, D C Morse, and
+  S C Glotzer. "Strong scaling of general-purpose molecular dynamics simulations
+  on GPUs", Computer Physics Communications 192 (2015) 97--107
+and
+* http://codeblue.umich.edu/hoomd-blue
+You can save these citations to file using cite.save().
+-----
+Ranks 0-7: HOOMD-blue is running on the CPU
+polymer_brush.py:012  |  system=init.read_xml(filename='init.xml')
+notice(2): Reading init.xml...
+notice(2): --- hoomd_xml file read summary
+notice(2): 1740 positions at timestep 0
+notice(2): 1740 velocities
+notice(2): 1740 masses
+notice(2): 1740 diameters
+notice(2): 5 particle types
+notice(2): 1740 particle body values
+notice(2): 1580 bonds
+notice(2): 1420 angles
+notice(2): 3780 dihedrals
+notice(2): 1740 charges
+HOOMD-blue is using domain decomposition: n_x = 1 n_y = 2 n_z = 4.
+1 x 2 x 4 local grid on 1 nodes
+notice(2): Group "all" created containing 1740 particles
+polymer_brush.py:018  |  system.replicate(nx=rep, ny=rep, nz=1)
+polymer_brush.py:019  |  typeW1=group.type('W1')
+notice(2): Group "type W1" created containing 15360 particles
+polymer_brush.py:020  |  typeW2=group.type('W2')
+*Warning*: W2 does not exist in the system, creating an empty group
+notice(2): Group "type W2" created containing 0 particles
+notice(2): Group "Wall" created containing 15360 particles
+polymer_brush.py:022  |  typeB= group.type('B')
+notice(2): Group "type B" created containing 261120 particles
+polymer_brush.py:023  |  typeSolvBackBone = group.type('Solvent')
+notice(2): Group "type Solvent" created containing 102400 particles
+polymer_brush.py:024  |  typeC= group.type('C')
+*Warning*: C does not exist in the system, creating an empty group
+notice(2): Group "type C" created containing 0 particles
+polymer_brush.py:025  |  typeCH3_W1=group.type('CH3_W1')
+notice(2): Group "type CH3_W1" created containing 15360 particles
+polymer_brush.py:026  |  typeCH3_W2=group.type('CH3_W2')
+*Warning*: CH3_W2 does not exist in the system, creating an empty group
+notice(2): Group "type CH3_W2" created containing 0 particles
+polymer_brush.py:027  |  typeSolvTail=group.type('SolvTail')
+notice(2): Group "type SolvTail" created containing 51200 particles
+notice(2): Group "BCH3-particles" created containing 276480 particles
+notice(2): Group "CCH3-particles" created containing 0 particles
+notice(2): Group "all-solvent" created containing 153600 particles
+notice(2): Group "bc-particles" created containing 276480 particles
+notice(2): Group "typeAll" created containing 430080 particles
+notice(2): Group "typeNPT" created containing 445440 particles
+Number of polymeric particles 430080
+polymer_brush.py:044  |  lj = pair.lj(r_cut=3.3)
+nlist.py:1051  |          globals.neighbor_list = cell();
+polymer_brush.py:052  |  lj.pair_coeff.set('Solvent','W1' ,epsilon=0 , sigma=1.3144)
+polymer_brush.py:053  |  lj.pair_coeff.set('Solvent','W2' ,epsilon=0 , sigma=1.3144)
+polymer_brush.py:054  |  lj.pair_coeff.set('Solvent','Solvent' ,epsilon=1.0*tether_bulk , sigma=1.3144)
+polymer_brush.py:055  |  lj.pair_coeff.set('Solvent','B' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:056  |  lj.pair_coeff.set('Solvent','C' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:057  |  lj.pair_coeff.set('Solvent','CH3_W1' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:058  |  lj.pair_coeff.set('Solvent','CH3_W2' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:059  |  lj.pair_coeff.set('Solvent','SolvTail' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:060  |  lj.pair_coeff.set('B','B' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:061  |  lj.pair_coeff.set('C','C' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:062  |  lj.pair_coeff.set('B','C' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:063  |  lj.pair_coeff.set('B','CH3_W1' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:064  |  lj.pair_coeff.set('B','CH3_W2' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:065  |  lj.pair_coeff.set('C','CH3_W1' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:066  |  lj.pair_coeff.set('C','CH3_W2' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:067  |  lj.pair_coeff.set('CH3_W1','CH3_W1' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:068  |  lj.pair_coeff.set('CH3_W1','CH3_W2' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:069  |  lj.pair_coeff.set('CH3_W2' ,'CH3_W2' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:071  |  lj.pair_coeff.set('B','SolvTail' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:072  |  lj.pair_coeff.set('C','SolvTail' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:073  |  lj.pair_coeff.set('CH3_W1','SolvTail' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:074  |  lj.pair_coeff.set('CH3_W2','SolvTail' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:075  |  lj.pair_coeff.set('SolvTail' ,'SolvTail' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:077  |  lj.pair_coeff.set('B','C' ,epsilon=0.01 , sigma=2.62 , alpha=0.0)
+polymer_brush.py:078  |  lj.pair_coeff.set('W1','W2' ,epsilon=0.0 , sigma=1.0)
+polymer_brush.py:079  |  lj.pair_coeff.set('W1','W1' ,epsilon=0.0 , sigma=1.0)
+polymer_brush.py:080  |  lj.pair_coeff.set('W1','B' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:081  |  lj.pair_coeff.set('W1','C' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:082  |  lj.pair_coeff.set('W2','W2' ,epsilon=0.0 , sigma=1.0)
+polymer_brush.py:083  |  lj.pair_coeff.set('W2','B' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:084  |  lj.pair_coeff.set('W2','C' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:085  |  lj.pair_coeff.set('W1','CH3_W1' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:086  |  lj.pair_coeff.set('W1','CH3_W2' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:087  |  lj.pair_coeff.set('W1','SolvTail' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:088  |  lj.pair_coeff.set('W2','CH3_W1' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:089  |  lj.pair_coeff.set('W2','CH3_W2' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:090  |  lj.pair_coeff.set('W2','SolvTail' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:091  |  lj.pair_coeff.set('A','C' ,epsilon=0.0 , sigma=1.0 , alpha=0.0)
+polymer_brush.py:093  |  slj = pair.slj(r_cut= 1.3)
+notice(2): Notice: slj set d_max=2.0
+polymer_brush.py:094  |  slj.set_params(mode="shift")
+pair.py:886  |          pair.set_params(self, mode=mode);
+polymer_brush.py:095  |  slj.pair_coeff.set('W2','Solvent', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:096  |  slj.pair_coeff.set('W1','Solvent', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:097  |  slj.pair_coeff.set('Solvent','Solvent', epsilon = 0, sigma = 1.0)
+polymer_brush.py:098  |  slj.pair_coeff.set('Solvent','B', epsilon = 0, sigma = 1.0)
+polymer_brush.py:099  |  slj.pair_coeff.set('Solvent','C', epsilon = 0, sigma = 1.0)
+polymer_brush.py:100  |  slj.pair_coeff.set('Solvent','CH3_W1', epsilon = 0, sigma = 1.0)
+polymer_brush.py:101  |  slj.pair_coeff.set('Solvent','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:102  |  slj.pair_coeff.set('Solvent','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:103  |  slj.pair_coeff.set('W1','W2', epsilon = 0 , sigma =1.0)
+polymer_brush.py:104  |  slj.pair_coeff.set('W1','W1', epsilon = 0 , sigma =1.0)
+polymer_brush.py:105  |  slj.pair_coeff.set('W2','W2', epsilon = 0 , sigma =1.0)
+polymer_brush.py:106  |  slj.pair_coeff.set('W1','B', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:107  |  slj.pair_coeff.set('W1','C', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:108  |  slj.pair_coeff.set('W2','B', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:109  |  slj.pair_coeff.set('W2','C', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:110  |  slj.pair_coeff.set('W1','CH3_W1', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:111  |  slj.pair_coeff.set('W1','CH3_W2', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:112  |  slj.pair_coeff.set('W2','CH3_W1', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:113  |  slj.pair_coeff.set('W2','CH3_W2', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:114  |  slj.pair_coeff.set('W1','SolvTail', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:115  |  slj.pair_coeff.set('W2','SolvTail', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:116  |  slj.pair_coeff.set('B','B', epsilon = 0, sigma = 1.0)
+polymer_brush.py:117  |  slj.pair_coeff.set('C','C', epsilon = 0, sigma = 1.0)
+polymer_brush.py:118  |  slj.pair_coeff.set('B','C', epsilon = 0, sigma = 1.0)
+polymer_brush.py:119  |  slj.pair_coeff.set('B','CH3_W1', epsilon = 0, sigma = 1.0)
+polymer_brush.py:120  |  slj.pair_coeff.set('B','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:121  |  slj.pair_coeff.set('B','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:122  |  slj.pair_coeff.set('C','CH3_W1', epsilon = 0, sigma = 1.0)
+polymer_brush.py:123  |  slj.pair_coeff.set('C','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:124  |  slj.pair_coeff.set('C','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:125  |  slj.pair_coeff.set('CH3_W1','CH3_W1', epsilon = 0, sigma = 1.0)
+polymer_brush.py:126  |  slj.pair_coeff.set('CH3_W1','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:127  |  slj.pair_coeff.set('CH3_W2','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:128  |  slj.pair_coeff.set('CH3_W1','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:129  |  slj.pair_coeff.set('CH3_W2','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:130  |  slj.pair_coeff.set('SolvTail','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:133  |  harmonicO_O= bond.harmonic(name = 'O-O-bond')
+polymer_brush.py:135  |  harmonicO_O.bond_coeff.set('oleic', k=9892.9362 , r0=0.5)
+polymer_brush.py:138  |  harmonicO_O.bond_coeff.set('wall', k=9892.9362, r0=1.25)
+polymer_brush.py:141  |  angleWO = angle.harmonic()
+polymer_brush.py:142  |  angleWO.set_coeff('W-O' , k = 201.2878 , t0= 2.5307)
+polymer_brush.py:143  |  angleWO.set_coeff('O-O' , k = 201.2878 , t0= 1.92)
+polymer_brush.py:144  |  angleWO.set_coeff('kink' , k = 1000.2878 , t0= 2.8)
+polymer_brush.py:150  |  dihedralField = dihedral.harmonic()
+polymer_brush.py:151  |  dihedralField.set_coeff('DihedralW1' , k = 2.6838 , d=1 , n= 1)
+polymer_brush.py:152  |  dihedralField.set_coeff('DihedralW2' , k = 1.4543 , d=-1 , n= 2)
+polymer_brush.py:153  |  dihedralField.set_coeff('DihedralW3' , k =5.4347 , d=1 , n= 3)
+polymer_brush.py:154  |  dihedralField.set_coeff('Dihedral1' , k =2.6838 , d=1 , n= 1)
+polymer_brush.py:155  |  dihedralField.set_coeff('Dihedral2' , k = 1.4543 , d=-1 , n= 2)
+polymer_brush.py:156  |  dihedralField.set_coeff('Dihedral3' , k =5.4347 , d=1 , n= 3)
+polymer_brush.py:158  |  integrate.mode_standard(dt= 0.005)
+polymer_brush.py:160  |  integrator=integrate.nve(group=typeAll , limit=0.01 )
+polymer_brush.py:161  |  zeroer = update.zero_momentum(period = 1)
+polymer_brush.py:164  |  run(200)
+notice(2): -- Neighborlist exclusion statistics -- :
+notice(2): Particles with 1 exclusions             : 81920
+notice(2): Particles with 2 exclusions             : 363520
+notice(2): Neighbors included by diameter          : yes
+notice(2): Neighbors excluded when in the same body: no
+** starting run **
+Time 00:00:15 | Step 1 / 200 | TPS 0.0748881 | ETA 00:44:17
+Time 00:00:28 | Step 22 / 200 | TPS 1.63701 | ETA 00:01:48
+Time 00:00:38 | Step 43 / 200 | TPS 2.03666 | ETA 00:01:17
+Time 00:00:48 | Step 64 / 200 | TPS 2.0578 | ETA 00:01:06
+Time 00:00:59 | Step 85 / 200 | TPS 2.07539 | ETA 00:00:55
+Time 00:01:09 | Step 106 / 200 | TPS 2.05112 | ETA 00:00:45
+Time 00:01:19 | Step 127 / 200 | TPS 2.08442 | ETA 00:00:35
+Time 00:01:30 | Step 143 / 200 | TPS 1.51123 | ETA 00:00:37
+Time 00:01:42 | Step 164 / 200 | TPS 1.70163 | ETA 00:00:21
+Time 00:01:52 | Step 186 / 200 | TPS 2.12876 | ETA 00:00:06
+Time 00:01:57 | Step 200 / 200 | TPS 2.7428 | ETA 00:00:00
+Average TPS: 1.73165
+---------
+-- Neighborlist stats:
+8 normal updates / 2 forced updates / 0 dangerous updates
+n_neigh_min: 0 / n_neigh_max: 136 / n_neigh_avg: 56.2759
+shortest rebuild period: 21
+-- Cell list stats:
+Dimension: 40, 21, 3
+n_min    : 8 / n_max: 182 / n_avg: 71.6825
+** run complete **
+polymer_brush.py:165  |  zeroer.disable()
+polymer_brush.py:167  |  integrator.disable()
+polymer_brush.py:169  |  integrator=integrate.npt(group=typeAll , tau=1.0 , T= 1.0 , tauP = 1.2 , P = 0.00078 , x=False , y = False , z = True , rescale_all=True )
+polymer_brush.py:172  |  run(5e2, profile=True, limit_hours=1)
+** starting run **
+Time 00:02:10 | Step 212 / 700 | TPS 0.9241 | ETA 00:08:48
+Time 00:02:23 | Step 229 / 700 | TPS 1.32635 | ETA 00:05:55
+Time 00:02:33 | Step 241 / 700 | TPS 1.17389 | ETA 00:06:31
+Time 00:02:45 | Step 255 / 700 | TPS 1.22461 | ETA 00:06:03
+Time 00:02:55 | Step 272 / 700 | TPS 1.64322 | ETA 00:04:20
+Time 00:03:05 | Step 283 / 700 | TPS 1.09395 | ETA 00:06:21
+Time 00:03:17 | Step 298 / 700 | TPS 1.26078 | ETA 00:05:18
+Time 00:03:27 | Step 309 / 700 | TPS 1.08202 | ETA 00:06:01
+Time 00:03:40 | Step 325 / 700 | TPS 1.29441 | ETA 00:04:49
+Time 00:03:50 | Step 337 / 700 | TPS 1.17038 | ETA 00:05:10
+Time 00:04:00 | Step 349 / 700 | TPS 1.15374 | ETA 00:05:04
+Time 00:04:10 | Step 360 / 700 | TPS 1.09154 | ETA 00:05:11
+Time 00:04:21 | Step 372 / 700 | TPS 1.1527 | ETA 00:04:44
+Time 00:04:31 | Step 383 / 700 | TPS 1.0921 | ETA 00:04:50
+Time 00:04:42 | Step 397 / 700 | TPS 1.22142 | ETA 00:04:08
+Time 00:04:55 | Step 408 / 700 | TPS 0.891495 | ETA 00:05:27
+Time 00:05:05 | Step 420 / 700 | TPS 1.15831 | ETA 00:04:01
+Time 00:05:15 | Step 431 / 700 | TPS 1.09757 | ETA 00:04:05
+Time 00:05:25 | Step 442 / 700 | TPS 1.09692 | ETA 00:03:55
+Time 00:05:36 | Step 455 / 700 | TPS 1.1867 | ETA 00:03:26
+Time 00:05:46 | Step 467 / 700 | TPS 1.15908 | ETA 00:03:21
+Time 00:05:57 | Step 475 / 700 | TPS 0.730366 | ETA 00:05:08
+Time 00:06:08 | Step 488 / 700 | TPS 1.18815 | ETA 00:02:58
+Time 00:06:22 | Step 501 / 700 | TPS 0.972792 | ETA 00:03:24
+Time 00:06:36 | Step 513 / 700 | TPS 0.811793 | ETA 00:03:50
+Time 00:06:47 | Step 525 / 700 | TPS 1.16204 | ETA 00:02:30
+Time 00:06:57 | Step 532 / 700 | TPS 0.669268 | ETA 00:04:11
+Time 00:07:08 | Step 544 / 700 | TPS 1.14928 | ETA 00:02:15
+Time 00:07:18 | Step 556 / 700 | TPS 1.14984 | ETA 00:02:05
+Time 00:07:28 | Step 568 / 700 | TPS 1.14976 | ETA 00:01:54
+Time 00:07:39 | Step 580 / 700 | TPS 1.15213 | ETA 00:01:44
+Time 00:07:49 | Step 592 / 700 | TPS 1.15182 | ETA 00:01:33
+Time 00:08:01 | Step 601 / 700 | TPS 0.787124 | ETA 00:02:05
+Time 00:08:12 | Step 614 / 700 | TPS 1.19924 | ETA 00:01:11
+Time 00:08:22 | Step 626 / 700 | TPS 1.1553 | ETA 00:01:04
+Time 00:08:32 | Step 638 / 700 | TPS 1.15061 | ETA 00:00:53
+Time 00:08:43 | Step 650 / 700 | TPS 1.15239 | ETA 00:00:43
+Time 00:08:53 | Step 662 / 700 | TPS 1.15148 | ETA 00:00:33
+Time 00:09:04 | Step 674 / 700 | TPS 1.15317 | ETA 00:00:22
+Time 00:09:14 | Step 685 / 700 | TPS 1.0994 | ETA 00:00:13
+Time 00:09:24 | Step 697 / 700 | TPS 1.15345 | ETA 00:00:02
+Time 00:09:26 | Step 700 / 700 | TPS 2.02306 | ETA 00:00:00
+Average TPS: 1.11554
+Simulation: 448.2121s | 100.000% 
+        Bond harmonic:      3.4148s |  0.762% 
+        Harmonic Angle:     7.2913s |  1.627% 
+        Harmonic Dihedral: 20.4314s |  4.558% 
+        Integrate:         18.0748s |  4.033% 
+                NPT step 1:  1.5250s |  0.340% 
+                        Thermo:  0.0026s |  0.001% 
+                        Self:    1.5224s |  0.340% 
+                NPT step 2: 12.9506s |  2.889% 
+                        Thermo:  1.2862s |  0.287% 
+                        Self:   11.6644s |  2.602% 
+                Net force:   3.5754s |  0.798% 
+        Neighbor:          198.0902s | 44.196% 
+                Cell:        0.5675s |  0.127% 
+                        compute:  0.5629s |  0.126% 
+                        init:     0.0041s |  0.001% 
+                Dist check:  0.3963s |  0.088% 
+                        MPI allreduce:  0.0178s |  0.004% 
+                compute:    195.0878s | 43.526% 
+                filter:      1.9254s |  0.430% 
+                head-list:   0.0217s |  0.005% 
+                update-ex:   0.0890s |  0.020% 
+        Pair lj:           124.3830s | 27.751% 
+        Pair slj:          67.6084s | 15.084% 
+        SFCPack:            0.1211s |  0.027% 
+        comm_ghost_exch:    0.6782s |  0.151% 
+                MPI send/recv:  0.1157s |  0.026% 
+                Self:           0.5625s |  0.125% 
+        comm_ghost_update:  0.5775s |  0.129% 
+                MPI send/recv:  0.2984s |  0.067% 4.24293 GiB/s 
+        comm_migrate:       7.5093s |  1.675% 
+                MPI send/recv:  0.0202s |  0.005% 
+                angle:          0.9782s |  0.218% 
+                        MPI send/recv:  0.0121s |  0.003% 112.83057 MiB/s 
+                        Self:           0.9661s |  0.216% 
+                bond:           0.6506s |  0.145% 
+                        MPI send/recv:  0.0167s |  0.004% 37.72651 MiB/s 
+                        Self:           0.6339s |  0.141% 
+                dihedral:       4.0370s |  0.901% 
+                        MPI send/recv:  0.0245s |  0.005% 294.30471 MiB/s 
+                        Self:           4.0125s |  0.895% 
+                pack:           1.3354s |  0.298% 
+                unpack:         0.0526s |  0.012% 
+---------
+-- Neighborlist stats:
+69 normal updates / 5 forced updates / 0 dangerous updates
+n_neigh_min: 0 / n_neigh_max: 138 / n_neigh_avg: 55.83921
+shortest rebuild period: 5
+-- Cell list stats:
+Dimension: 40, 21, 3
+n_min    : 8 / n_max: 176 / n_avg: 69.61230
+** run complete **
+
+
+
+
+
+
+
+
+
+
+################################################################
+Running: mpirun -n 4 python polymer_brush.py --mode=cpu --user=16
+HOOMD-blue 1.3.3-unknown CUDA (7.5) SINGLE MPI SSE SSE2 SSE3 
+Compiled: 03/06/2016
+Copyright 2009-2016 The Regents of the University of Michigan.
+
+All publications and presentations based on HOOMD-blue, including any reports
+or published results obtained, in whole or in part, with HOOMD-blue, will
+acknowledge its use according to the terms posted at the time of submission on:
+http://codeblue.umich.edu/hoomd-blue/citations.html
+-----
+You are using HOOMD-blue. Read and cite the following:
+* J A Anderson, C D Lorenz, and A Travesset. "General purpose molecular dynamics
+  simulations fully implemented on graphics processing units", Journal of
+  Computational Physics 227 (2008) 5342--5359
+and
+* J Glaser, T D Nguyen, J A Anderson, P Liu, F Spiga, J A Millan, D C Morse, and
+  S C Glotzer. "Strong scaling of general-purpose molecular dynamics simulations
+  on GPUs", Computer Physics Communications 192 (2015) 97--107
+and
+* http://codeblue.umich.edu/hoomd-blue
+You can save these citations to file using cite.save().
+-----
+Ranks 0-3: HOOMD-blue is running on the CPU
+polymer_brush.py:012  |  system=init.read_xml(filename='init.xml')
+notice(2): Reading init.xml...
+notice(2): --- hoomd_xml file read summary
+notice(2): 1740 positions at timestep 0
+notice(2): 1740 velocities
+notice(2): 1740 masses
+notice(2): 1740 diameters
+notice(2): 5 particle types
+notice(2): 1740 particle body values
+notice(2): 1580 bonds
+notice(2): 1420 angles
+notice(2): 3780 dihedrals
+notice(2): 1740 charges
+HOOMD-blue is using domain decomposition: n_x = 1 n_y = 1 n_z = 4.
+1 x 1 x 4 local grid on 1 nodes
+notice(2): Group "all" created containing 1740 particles
+polymer_brush.py:018  |  system.replicate(nx=rep, ny=rep, nz=1)
+polymer_brush.py:019  |  typeW1=group.type('W1')
+notice(2): Group "type W1" created containing 15360 particles
+polymer_brush.py:020  |  typeW2=group.type('W2')
+*Warning*: W2 does not exist in the system, creating an empty group
+notice(2): Group "type W2" created containing 0 particles
+notice(2): Group "Wall" created containing 15360 particles
+polymer_brush.py:022  |  typeB= group.type('B')
+notice(2): Group "type B" created containing 261120 particles
+polymer_brush.py:023  |  typeSolvBackBone = group.type('Solvent')
+notice(2): Group "type Solvent" created containing 102400 particles
+polymer_brush.py:024  |  typeC= group.type('C')
+*Warning*: C does not exist in the system, creating an empty group
+notice(2): Group "type C" created containing 0 particles
+polymer_brush.py:025  |  typeCH3_W1=group.type('CH3_W1')
+notice(2): Group "type CH3_W1" created containing 15360 particles
+polymer_brush.py:026  |  typeCH3_W2=group.type('CH3_W2')
+*Warning*: CH3_W2 does not exist in the system, creating an empty group
+notice(2): Group "type CH3_W2" created containing 0 particles
+polymer_brush.py:027  |  typeSolvTail=group.type('SolvTail')
+notice(2): Group "type SolvTail" created containing 51200 particles
+notice(2): Group "BCH3-particles" created containing 276480 particles
+notice(2): Group "CCH3-particles" created containing 0 particles
+notice(2): Group "all-solvent" created containing 153600 particles
+notice(2): Group "bc-particles" created containing 276480 particles
+notice(2): Group "typeAll" created containing 430080 particles
+notice(2): Group "typeNPT" created containing 445440 particles
+Number of polymeric particles 430080
+polymer_brush.py:044  |  lj = pair.lj(r_cut=3.3)
+nlist.py:1051  |          globals.neighbor_list = cell();
+polymer_brush.py:052  |  lj.pair_coeff.set('Solvent','W1' ,epsilon=0 , sigma=1.3144)
+polymer_brush.py:053  |  lj.pair_coeff.set('Solvent','W2' ,epsilon=0 , sigma=1.3144)
+polymer_brush.py:054  |  lj.pair_coeff.set('Solvent','Solvent' ,epsilon=1.0*tether_bulk , sigma=1.3144)
+polymer_brush.py:055  |  lj.pair_coeff.set('Solvent','B' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:056  |  lj.pair_coeff.set('Solvent','C' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:057  |  lj.pair_coeff.set('Solvent','CH3_W1' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:058  |  lj.pair_coeff.set('Solvent','CH3_W2' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:059  |  lj.pair_coeff.set('Solvent','SolvTail' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:060  |  lj.pair_coeff.set('B','B' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:061  |  lj.pair_coeff.set('C','C' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:062  |  lj.pair_coeff.set('B','C' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:063  |  lj.pair_coeff.set('B','CH3_W1' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:064  |  lj.pair_coeff.set('B','CH3_W2' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:065  |  lj.pair_coeff.set('C','CH3_W1' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:066  |  lj.pair_coeff.set('C','CH3_W2' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:067  |  lj.pair_coeff.set('CH3_W1','CH3_W1' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:068  |  lj.pair_coeff.set('CH3_W1','CH3_W2' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:069  |  lj.pair_coeff.set('CH3_W2' ,'CH3_W2' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:071  |  lj.pair_coeff.set('B','SolvTail' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:072  |  lj.pair_coeff.set('C','SolvTail' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:073  |  lj.pair_coeff.set('CH3_W1','SolvTail' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:074  |  lj.pair_coeff.set('CH3_W2','SolvTail' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:075  |  lj.pair_coeff.set('SolvTail' ,'SolvTail' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:077  |  lj.pair_coeff.set('B','C' ,epsilon=0.01 , sigma=2.62 , alpha=0.0)
+polymer_brush.py:078  |  lj.pair_coeff.set('W1','W2' ,epsilon=0.0 , sigma=1.0)
+polymer_brush.py:079  |  lj.pair_coeff.set('W1','W1' ,epsilon=0.0 , sigma=1.0)
+polymer_brush.py:080  |  lj.pair_coeff.set('W1','B' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:081  |  lj.pair_coeff.set('W1','C' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:082  |  lj.pair_coeff.set('W2','W2' ,epsilon=0.0 , sigma=1.0)
+polymer_brush.py:083  |  lj.pair_coeff.set('W2','B' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:084  |  lj.pair_coeff.set('W2','C' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:085  |  lj.pair_coeff.set('W1','CH3_W1' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:086  |  lj.pair_coeff.set('W1','CH3_W2' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:087  |  lj.pair_coeff.set('W1','SolvTail' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:088  |  lj.pair_coeff.set('W2','CH3_W1' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:089  |  lj.pair_coeff.set('W2','CH3_W2' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:090  |  lj.pair_coeff.set('W2','SolvTail' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:091  |  lj.pair_coeff.set('A','C' ,epsilon=0.0 , sigma=1.0 , alpha=0.0)
+polymer_brush.py:093  |  slj = pair.slj(r_cut= 1.3)
+notice(2): Notice: slj set d_max=2.0
+polymer_brush.py:094  |  slj.set_params(mode="shift")
+pair.py:886  |          pair.set_params(self, mode=mode);
+polymer_brush.py:095  |  slj.pair_coeff.set('W2','Solvent', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:096  |  slj.pair_coeff.set('W1','Solvent', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:097  |  slj.pair_coeff.set('Solvent','Solvent', epsilon = 0, sigma = 1.0)
+polymer_brush.py:098  |  slj.pair_coeff.set('Solvent','B', epsilon = 0, sigma = 1.0)
+polymer_brush.py:099  |  slj.pair_coeff.set('Solvent','C', epsilon = 0, sigma = 1.0)
+polymer_brush.py:100  |  slj.pair_coeff.set('Solvent','CH3_W1', epsilon = 0, sigma = 1.0)
+polymer_brush.py:101  |  slj.pair_coeff.set('Solvent','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:102  |  slj.pair_coeff.set('Solvent','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:103  |  slj.pair_coeff.set('W1','W2', epsilon = 0 , sigma =1.0)
+polymer_brush.py:104  |  slj.pair_coeff.set('W1','W1', epsilon = 0 , sigma =1.0)
+polymer_brush.py:105  |  slj.pair_coeff.set('W2','W2', epsilon = 0 , sigma =1.0)
+polymer_brush.py:106  |  slj.pair_coeff.set('W1','B', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:107  |  slj.pair_coeff.set('W1','C', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:108  |  slj.pair_coeff.set('W2','B', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:109  |  slj.pair_coeff.set('W2','C', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:110  |  slj.pair_coeff.set('W1','CH3_W1', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:111  |  slj.pair_coeff.set('W1','CH3_W2', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:112  |  slj.pair_coeff.set('W2','CH3_W1', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:113  |  slj.pair_coeff.set('W2','CH3_W2', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:114  |  slj.pair_coeff.set('W1','SolvTail', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:115  |  slj.pair_coeff.set('W2','SolvTail', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:116  |  slj.pair_coeff.set('B','B', epsilon = 0, sigma = 1.0)
+polymer_brush.py:117  |  slj.pair_coeff.set('C','C', epsilon = 0, sigma = 1.0)
+polymer_brush.py:118  |  slj.pair_coeff.set('B','C', epsilon = 0, sigma = 1.0)
+polymer_brush.py:119  |  slj.pair_coeff.set('B','CH3_W1', epsilon = 0, sigma = 1.0)
+polymer_brush.py:120  |  slj.pair_coeff.set('B','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:121  |  slj.pair_coeff.set('B','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:122  |  slj.pair_coeff.set('C','CH3_W1', epsilon = 0, sigma = 1.0)
+polymer_brush.py:123  |  slj.pair_coeff.set('C','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:124  |  slj.pair_coeff.set('C','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:125  |  slj.pair_coeff.set('CH3_W1','CH3_W1', epsilon = 0, sigma = 1.0)
+polymer_brush.py:126  |  slj.pair_coeff.set('CH3_W1','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:127  |  slj.pair_coeff.set('CH3_W2','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:128  |  slj.pair_coeff.set('CH3_W1','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:129  |  slj.pair_coeff.set('CH3_W2','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:130  |  slj.pair_coeff.set('SolvTail','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:133  |  harmonicO_O= bond.harmonic(name = 'O-O-bond')
+polymer_brush.py:135  |  harmonicO_O.bond_coeff.set('oleic', k=9892.9362 , r0=0.5)
+polymer_brush.py:138  |  harmonicO_O.bond_coeff.set('wall', k=9892.9362, r0=1.25)
+polymer_brush.py:141  |  angleWO = angle.harmonic()
+polymer_brush.py:142  |  angleWO.set_coeff('W-O' , k = 201.2878 , t0= 2.5307)
+polymer_brush.py:143  |  angleWO.set_coeff('O-O' , k = 201.2878 , t0= 1.92)
+polymer_brush.py:144  |  angleWO.set_coeff('kink' , k = 1000.2878 , t0= 2.8)
+polymer_brush.py:150  |  dihedralField = dihedral.harmonic()
+polymer_brush.py:151  |  dihedralField.set_coeff('DihedralW1' , k = 2.6838 , d=1 , n= 1)
+polymer_brush.py:152  |  dihedralField.set_coeff('DihedralW2' , k = 1.4543 , d=-1 , n= 2)
+polymer_brush.py:153  |  dihedralField.set_coeff('DihedralW3' , k =5.4347 , d=1 , n= 3)
+polymer_brush.py:154  |  dihedralField.set_coeff('Dihedral1' , k =2.6838 , d=1 , n= 1)
+polymer_brush.py:155  |  dihedralField.set_coeff('Dihedral2' , k = 1.4543 , d=-1 , n= 2)
+polymer_brush.py:156  |  dihedralField.set_coeff('Dihedral3' , k =5.4347 , d=1 , n= 3)
+polymer_brush.py:158  |  integrate.mode_standard(dt= 0.005)
+polymer_brush.py:160  |  integrator=integrate.nve(group=typeAll , limit=0.01 )
+polymer_brush.py:161  |  zeroer = update.zero_momentum(period = 1)
+polymer_brush.py:164  |  run(200)
+notice(2): -- Neighborlist exclusion statistics -- :
+notice(2): Particles with 1 exclusions             : 81920
+notice(2): Particles with 2 exclusions             : 363520
+notice(2): Neighbors included by diameter          : yes
+notice(2): Neighbors excluded when in the same body: no
+** starting run **
+Time 00:00:18 | Step 0 / 200 | TPS 0 | ETA -2562047:-47:-16
+Time 00:00:29 | Step 1 / 200 | TPS 0.0895648 | ETA 00:37:01
+Time 00:00:40 | Step 15 / 200 | TPS 1.30444 | ETA 00:02:21
+Time 00:00:55 | Step 22 / 200 | TPS 0.455129 | ETA 00:06:31
+Time 00:01:06 | Step 36 / 200 | TPS 1.34461 | ETA 00:02:01
+Time 00:01:16 | Step 43 / 200 | TPS 0.698714 | ETA 00:03:44
+Time 00:01:26 | Step 58 / 200 | TPS 1.43245 | ETA 00:01:39
+Time 00:01:36 | Step 66 / 200 | TPS 0.785704 | ETA 00:02:50
+Time 00:01:47 | Step 81 / 200 | TPS 1.47884 | ETA 00:01:20
+Time 00:01:57 | Step 89 / 200 | TPS 0.793198 | ETA 00:02:19
+Time 00:02:10 | Step 101 / 200 | TPS 0.926762 | ETA 00:01:46
+Time 00:02:20 | Step 116 / 200 | TPS 1.48888 | ETA 00:00:56
+Time 00:02:30 | Step 124 / 200 | TPS 0.788522 | ETA 00:01:36
+Time 00:02:40 | Step 139 / 200 | TPS 1.49645 | ETA 00:00:40
+Time 00:02:52 | Step 143 / 200 | TPS 0.332492 | ETA 00:02:51
+Time 00:03:02 | Step 159 / 200 | TPS 1.50222 | ETA 00:00:27
+Time 00:03:15 | Step 164 / 200 | TPS 0.397416 | ETA 00:01:30
+Time 00:03:26 | Step 180 / 200 | TPS 1.50364 | ETA 00:00:13
+Time 00:03:36 | Step 188 / 200 | TPS 0.795156 | ETA 00:00:15
+Time 00:03:44 | Step 200 / 200 | TPS 1.4935 | ETA 00:00:00
+Average TPS: 0.901372
+---------
+-- Neighborlist stats:
+8 normal updates / 2 forced updates / 0 dangerous updates
+n_neigh_min: 0 / n_neigh_max: 138 / n_neigh_avg: 55.5647
+shortest rebuild period: 21
+-- Cell list stats:
+Dimension: 40, 40, 3
+n_min    : 8 / n_max: 168 / n_avg: 68.64
+** run complete **
+polymer_brush.py:165  |  zeroer.disable()
+polymer_brush.py:167  |  integrator.disable()
+polymer_brush.py:169  |  integrator=integrate.npt(group=typeAll , tau=1.0 , T= 1.0 , tauP = 1.2 , P = 0.00078 , x=False , y = False , z = True , rescale_all=True )
+polymer_brush.py:172  |  run(5e2, profile=True, limit_hours=1)
+** starting run **
+Time 00:03:54 | Step 206 / 700 | TPS 0.578583 | ETA 00:14:13
+Time 00:04:05 | Step 213 / 700 | TPS 0.656657 | ETA 00:12:21
+Time 00:04:16 | Step 220 / 700 | TPS 0.656074 | ETA 00:12:11
+Time 00:04:28 | Step 229 / 700 | TPS 0.707654 | ETA 00:11:05
+Time 00:04:40 | Step 237 / 700 | TPS 0.693424 | ETA 00:11:07
+Time 00:04:57 | Step 246 / 700 | TPS 0.525707 | ETA 00:14:23
+Time 00:05:12 | Step 256 / 700 | TPS 0.671452 | ETA 00:11:01
+Time 00:05:26 | Step 265 / 700 | TPS 0.64599 | ETA 00:11:13
+Time 00:05:39 | Step 274 / 700 | TPS 0.662151 | ETA 00:10:43
+Time 00:05:51 | Step 282 / 700 | TPS 0.692743 | ETA 00:10:03
+Time 00:06:02 | Step 289 / 700 | TPS 0.654707 | ETA 00:10:27
+Time 00:06:13 | Step 297 / 700 | TPS 0.693269 | ETA 00:09:41
+Time 00:06:24 | Step 304 / 700 | TPS 0.647436 | ETA 00:10:11
+Time 00:06:35 | Step 311 / 700 | TPS 0.655327 | ETA 00:09:53
+Time 00:06:45 | Step 318 / 700 | TPS 0.653443 | ETA 00:09:44
+Time 00:06:57 | Step 326 / 700 | TPS 0.691721 | ETA 00:09:00
+Time 00:07:09 | Step 335 / 700 | TPS 0.72394 | ETA 00:08:24
+Time 00:07:25 | Step 343 / 700 | TPS 0.496548 | ETA 00:11:58
+Time 00:07:37 | Step 351 / 700 | TPS 0.69079 | ETA 00:08:25
+Time 00:07:49 | Step 359 / 700 | TPS 0.690863 | ETA 00:08:13
+Time 00:08:00 | Step 367 / 700 | TPS 0.690863 | ETA 00:08:02
+Time 00:08:12 | Step 375 / 700 | TPS 0.684992 | ETA 00:07:54
+Time 00:08:23 | Step 382 / 700 | TPS 0.64906 | ETA 00:08:09
+Time 00:08:34 | Step 390 / 700 | TPS 0.689251 | ETA 00:07:29
+Time 00:08:46 | Step 398 / 700 | TPS 0.691936 | ETA 00:07:16
+Time 00:08:58 | Step 401 / 700 | TPS 0.252017 | ETA 00:19:46
+Time 00:09:08 | Step 408 / 700 | TPS 0.655677 | ETA 00:07:25
+Time 00:09:19 | Step 415 / 700 | TPS 0.650534 | ETA 00:07:18
+Time 00:09:30 | Step 422 / 700 | TPS 0.654442 | ETA 00:07:04
+Time 00:09:41 | Step 429 / 700 | TPS 0.655593 | ETA 00:06:53
+Time 00:09:51 | Step 436 / 700 | TPS 0.655311 | ETA 00:06:42
+Time 00:10:02 | Step 443 / 700 | TPS 0.655485 | ETA 00:06:32
+Time 00:10:13 | Step 450 / 700 | TPS 0.65587 | ETA 00:06:21
+Time 00:10:23 | Step 457 / 700 | TPS 0.656262 | ETA 00:06:10
+Time 00:10:34 | Step 464 / 700 | TPS 0.656079 | ETA 00:05:59
+Time 00:10:49 | Step 471 / 700 | TPS 0.461373 | ETA 00:08:16
+Time 00:11:00 | Step 478 / 700 | TPS 0.656856 | ETA 00:05:37
+Time 00:11:10 | Step 485 / 700 | TPS 0.657388 | ETA 00:05:27
+Time 00:11:21 | Step 492 / 700 | TPS 0.657852 | ETA 00:05:16
+Time 00:11:32 | Step 499 / 700 | TPS 0.658012 | ETA 00:05:05
+Time 00:11:43 | Step 501 / 700 | TPS 0.18222 | ETA 00:18:12
+Time 00:11:53 | Step 508 / 700 | TPS 0.658961 | ETA 00:04:51
+Time 00:12:04 | Step 515 / 700 | TPS 0.658987 | ETA 00:04:40
+Time 00:12:18 | Step 521 / 700 | TPS 0.420816 | ETA 00:07:05
+Time 00:12:29 | Step 528 / 700 | TPS 0.659314 | ETA 00:04:20
+Time 00:12:39 | Step 535 / 700 | TPS 0.659565 | ETA 00:04:10
+Time 00:12:50 | Step 542 / 700 | TPS 0.659603 | ETA 00:03:59
+Time 00:13:01 | Step 549 / 700 | TPS 0.65971 | ETA 00:03:48
+Time 00:13:11 | Step 556 / 700 | TPS 0.660176 | ETA 00:03:38
+Time 00:13:22 | Step 563 / 700 | TPS 0.660562 | ETA 00:03:27
+Time 00:13:32 | Step 570 / 700 | TPS 0.660881 | ETA 00:03:16
+Time 00:13:43 | Step 577 / 700 | TPS 0.660941 | ETA 00:03:06
+Time 00:13:58 | Step 584 / 700 | TPS 0.460208 | ETA 00:04:12
+Time 00:14:09 | Step 591 / 700 | TPS 0.661961 | ETA 00:02:44
+Time 00:14:19 | Step 598 / 700 | TPS 0.656527 | ETA 00:02:35
+Time 00:14:31 | Step 601 / 700 | TPS 0.255029 | ETA 00:06:28
+Time 00:14:42 | Step 608 / 700 | TPS 0.663862 | ETA 00:02:18
+Time 00:14:52 | Step 615 / 700 | TPS 0.663257 | ETA 00:02:08
+Time 00:15:03 | Step 622 / 700 | TPS 0.660162 | ETA 00:01:58
+Time 00:15:13 | Step 629 / 700 | TPS 0.662588 | ETA 00:01:47
+Time 00:15:29 | Step 636 / 700 | TPS 0.46167 | ETA 00:02:18
+Time 00:15:39 | Step 643 / 700 | TPS 0.663664 | ETA 00:01:25
+Time 00:15:50 | Step 650 / 700 | TPS 0.664136 | ETA 00:01:15
+Time 00:16:00 | Step 657 / 700 | TPS 0.664243 | ETA 00:01:04
+Time 00:16:11 | Step 664 / 700 | TPS 0.663094 | ETA 00:00:54
+Time 00:16:21 | Step 671 / 700 | TPS 0.663351 | ETA 00:00:43
+Time 00:16:36 | Step 678 / 700 | TPS 0.462354 | ETA 00:00:47
+Time 00:16:47 | Step 685 / 700 | TPS 0.66468 | ETA 00:00:22
+Time 00:16:58 | Step 692 / 700 | TPS 0.664482 | ETA 00:00:12
+Time 00:17:08 | Step 699 / 700 | TPS 0.664632 | ETA 00:00:01
+Time 00:17:09 | Step 700 / 700 | TPS 1.0598 | ETA 00:00:00
+Average TPS: 0.620988
+Simulation: 805.1682s | 100.000% 
+        Bond harmonic:      6.7810s |  0.842% 
+        Harmonic Angle:    15.3437s |  1.906% 
+        Harmonic Dihedral: 41.2345s |  5.121% 
+        Integrate:         13.5038s |  1.677% 
+                NPT step 1:  2.9236s |  0.363% 
+                        Thermo:  0.0052s |  0.001% 
+                        Self:    2.9184s |  0.362% 
+                NPT step 2:  3.7388s |  0.464% 
+                        Thermo:  2.3683s |  0.294% 
+                        Self:    1.3705s |  0.170% 
+                Net force:   6.8022s |  0.845% 
+        Neighbor:          367.2175s | 45.608% 
+                Cell:        0.9391s |  0.117% 
+                        compute:  0.9345s |  0.116% 
+                        init:     0.0040s |  0.001% 
+                Dist check:  0.7381s |  0.092% 
+                        MPI allreduce:  0.0201s |  0.002% 
+                compute:    361.8191s | 44.937% 
+                filter:      3.5386s |  0.439% 
+                head-list:   0.0294s |  0.004% 
+                update-ex:   0.1504s |  0.019% 
+        Pair lj:           229.7340s | 28.532% 
+        Pair slj:          122.5931s | 15.226% 
+        SFCPack:            0.2436s |  0.030% 
+        comm_ghost_exch:    1.0376s |  0.129% 
+                MPI send/recv:  0.1382s |  0.017% 
+                Self:           0.8994s |  0.112% 
+        comm_ghost_update:  0.7528s |  0.093% 
+                MPI send/recv:  0.3996s |  0.050% 4.90175 GiB/s 
+        comm_migrate:       6.6907s |  0.831% 
+                MPI send/recv:  0.0027s |  0.000% 
+                angle:          0.8544s |  0.106% 
+                        MPI send/recv:  0.0017s |  0.000% 87.10065 MiB/s 
+                        Self:           0.8527s |  0.106% 
+                bond:           0.5650s |  0.070% 
+                        MPI send/recv:  0.0025s |  0.000% 38.11726 MiB/s 
+                dihedral:       3.5658s |  0.443% 
+                        MPI send/recv:  0.0042s |  0.001% 146.86429 MiB/s 
+                        Self:           3.5616s |  0.442% 
+                pack:           1.2524s |  0.156% 
+                unpack:         0.0553s |  0.007% 
+---------
+-- Neighborlist stats:
+68 normal updates / 5 forced updates / 0 dangerous updates
+n_neigh_min: 0 / n_neigh_max: 137 / n_neigh_avg: 55.06005
+shortest rebuild period: 5
+-- Cell list stats:
+Dimension: 40, 40, 3
+n_min    : 8 / n_max: 171 / n_avg: 66.67521
+** run complete **
+
+
+
+
+
+
+
+
+
+
+################################################################
+Running: mpirun -n 2 python polymer_brush.py --mode=cpu --user=16
+HOOMD-blue 1.3.3-unknown CUDA (7.5) SINGLE MPI SSE SSE2 SSE3 
+Compiled: 03/06/2016
+Copyright 2009-2016 The Regents of the University of Michigan.
+
+All publications and presentations based on HOOMD-blue, including any reports
+or published results obtained, in whole or in part, with HOOMD-blue, will
+acknowledge its use according to the terms posted at the time of submission on:
+http://codeblue.umich.edu/hoomd-blue/citations.html
+-----
+You are using HOOMD-blue. Read and cite the following:
+* J A Anderson, C D Lorenz, and A Travesset. "General purpose molecular dynamics
+  simulations fully implemented on graphics processing units", Journal of
+  Computational Physics 227 (2008) 5342--5359
+and
+* J Glaser, T D Nguyen, J A Anderson, P Liu, F Spiga, J A Millan, D C Morse, and
+  S C Glotzer. "Strong scaling of general-purpose molecular dynamics simulations
+  on GPUs", Computer Physics Communications 192 (2015) 97--107
+and
+* http://codeblue.umich.edu/hoomd-blue
+You can save these citations to file using cite.save().
+-----
+Ranks 0-1: HOOMD-blue is running on the CPU
+polymer_brush.py:012  |  system=init.read_xml(filename='init.xml')
+notice(2): Reading init.xml...
+notice(2): --- hoomd_xml file read summary
+notice(2): 1740 positions at timestep 0
+notice(2): 1740 velocities
+notice(2): 1740 masses
+notice(2): 1740 diameters
+notice(2): 5 particle types
+notice(2): 1740 particle body values
+notice(2): 1580 bonds
+notice(2): 1420 angles
+notice(2): 3780 dihedrals
+notice(2): 1740 charges
+HOOMD-blue is using domain decomposition: n_x = 1 n_y = 1 n_z = 2.
+1 x 1 x 2 local grid on 1 nodes
+notice(2): Group "all" created containing 1740 particles
+polymer_brush.py:018  |  system.replicate(nx=rep, ny=rep, nz=1)
+polymer_brush.py:019  |  typeW1=group.type('W1')
+notice(2): Group "type W1" created containing 15360 particles
+polymer_brush.py:020  |  typeW2=group.type('W2')
+*Warning*: W2 does not exist in the system, creating an empty group
+notice(2): Group "type W2" created containing 0 particles
+notice(2): Group "Wall" created containing 15360 particles
+polymer_brush.py:022  |  typeB= group.type('B')
+notice(2): Group "type B" created containing 261120 particles
+polymer_brush.py:023  |  typeSolvBackBone = group.type('Solvent')
+notice(2): Group "type Solvent" created containing 102400 particles
+polymer_brush.py:024  |  typeC= group.type('C')
+*Warning*: C does not exist in the system, creating an empty group
+notice(2): Group "type C" created containing 0 particles
+polymer_brush.py:025  |  typeCH3_W1=group.type('CH3_W1')
+notice(2): Group "type CH3_W1" created containing 15360 particles
+polymer_brush.py:026  |  typeCH3_W2=group.type('CH3_W2')
+*Warning*: CH3_W2 does not exist in the system, creating an empty group
+notice(2): Group "type CH3_W2" created containing 0 particles
+polymer_brush.py:027  |  typeSolvTail=group.type('SolvTail')
+notice(2): Group "type SolvTail" created containing 51200 particles
+notice(2): Group "BCH3-particles" created containing 276480 particles
+notice(2): Group "CCH3-particles" created containing 0 particles
+notice(2): Group "all-solvent" created containing 153600 particles
+notice(2): Group "bc-particles" created containing 276480 particles
+notice(2): Group "typeAll" created containing 430080 particles
+notice(2): Group "typeNPT" created containing 445440 particles
+Number of polymeric particles 430080
+polymer_brush.py:044  |  lj = pair.lj(r_cut=3.3)
+nlist.py:1051  |          globals.neighbor_list = cell();
+polymer_brush.py:052  |  lj.pair_coeff.set('Solvent','W1' ,epsilon=0 , sigma=1.3144)
+polymer_brush.py:053  |  lj.pair_coeff.set('Solvent','W2' ,epsilon=0 , sigma=1.3144)
+polymer_brush.py:054  |  lj.pair_coeff.set('Solvent','Solvent' ,epsilon=1.0*tether_bulk , sigma=1.3144)
+polymer_brush.py:055  |  lj.pair_coeff.set('Solvent','B' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:056  |  lj.pair_coeff.set('Solvent','C' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:057  |  lj.pair_coeff.set('Solvent','CH3_W1' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:058  |  lj.pair_coeff.set('Solvent','CH3_W2' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:059  |  lj.pair_coeff.set('Solvent','SolvTail' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:060  |  lj.pair_coeff.set('B','B' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:061  |  lj.pair_coeff.set('C','C' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:062  |  lj.pair_coeff.set('B','C' ,epsilon=tether_bulk , sigma=1.3144)
+polymer_brush.py:063  |  lj.pair_coeff.set('B','CH3_W1' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:064  |  lj.pair_coeff.set('B','CH3_W2' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:065  |  lj.pair_coeff.set('C','CH3_W1' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:066  |  lj.pair_coeff.set('C','CH3_W2' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:067  |  lj.pair_coeff.set('CH3_W1','CH3_W1' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:068  |  lj.pair_coeff.set('CH3_W1','CH3_W2' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:069  |  lj.pair_coeff.set('CH3_W2' ,'CH3_W2' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:071  |  lj.pair_coeff.set('B','SolvTail' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:072  |  lj.pair_coeff.set('C','SolvTail' ,epsilon=bulk_tails , sigma=1.3144)
+polymer_brush.py:073  |  lj.pair_coeff.set('CH3_W1','SolvTail' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:074  |  lj.pair_coeff.set('CH3_W2','SolvTail' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:075  |  lj.pair_coeff.set('SolvTail' ,'SolvTail' ,epsilon=tails , sigma=1.3144)
+polymer_brush.py:077  |  lj.pair_coeff.set('B','C' ,epsilon=0.01 , sigma=2.62 , alpha=0.0)
+polymer_brush.py:078  |  lj.pair_coeff.set('W1','W2' ,epsilon=0.0 , sigma=1.0)
+polymer_brush.py:079  |  lj.pair_coeff.set('W1','W1' ,epsilon=0.0 , sigma=1.0)
+polymer_brush.py:080  |  lj.pair_coeff.set('W1','B' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:081  |  lj.pair_coeff.set('W1','C' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:082  |  lj.pair_coeff.set('W2','W2' ,epsilon=0.0 , sigma=1.0)
+polymer_brush.py:083  |  lj.pair_coeff.set('W2','B' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:084  |  lj.pair_coeff.set('W2','C' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:085  |  lj.pair_coeff.set('W1','CH3_W1' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:086  |  lj.pair_coeff.set('W1','CH3_W2' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:087  |  lj.pair_coeff.set('W1','SolvTail' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:088  |  lj.pair_coeff.set('W2','CH3_W1' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:089  |  lj.pair_coeff.set('W2','CH3_W2' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:090  |  lj.pair_coeff.set('W2','SolvTail' ,epsilon=0.0 , sigma = 1.0)
+polymer_brush.py:091  |  lj.pair_coeff.set('A','C' ,epsilon=0.0 , sigma=1.0 , alpha=0.0)
+polymer_brush.py:093  |  slj = pair.slj(r_cut= 1.3)
+notice(2): Notice: slj set d_max=2.0
+polymer_brush.py:094  |  slj.set_params(mode="shift")
+pair.py:886  |          pair.set_params(self, mode=mode);
+polymer_brush.py:095  |  slj.pair_coeff.set('W2','Solvent', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:096  |  slj.pair_coeff.set('W1','Solvent', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:097  |  slj.pair_coeff.set('Solvent','Solvent', epsilon = 0, sigma = 1.0)
+polymer_brush.py:098  |  slj.pair_coeff.set('Solvent','B', epsilon = 0, sigma = 1.0)
+polymer_brush.py:099  |  slj.pair_coeff.set('Solvent','C', epsilon = 0, sigma = 1.0)
+polymer_brush.py:100  |  slj.pair_coeff.set('Solvent','CH3_W1', epsilon = 0, sigma = 1.0)
+polymer_brush.py:101  |  slj.pair_coeff.set('Solvent','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:102  |  slj.pair_coeff.set('Solvent','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:103  |  slj.pair_coeff.set('W1','W2', epsilon = 0 , sigma =1.0)
+polymer_brush.py:104  |  slj.pair_coeff.set('W1','W1', epsilon = 0 , sigma =1.0)
+polymer_brush.py:105  |  slj.pair_coeff.set('W2','W2', epsilon = 0 , sigma =1.0)
+polymer_brush.py:106  |  slj.pair_coeff.set('W1','B', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:107  |  slj.pair_coeff.set('W1','C', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:108  |  slj.pair_coeff.set('W2','B', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:109  |  slj.pair_coeff.set('W2','C', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:110  |  slj.pair_coeff.set('W1','CH3_W1', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:111  |  slj.pair_coeff.set('W1','CH3_W2', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:112  |  slj.pair_coeff.set('W2','CH3_W1', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:113  |  slj.pair_coeff.set('W2','CH3_W2', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:114  |  slj.pair_coeff.set('W1','SolvTail', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:115  |  slj.pair_coeff.set('W2','SolvTail', epsilon = 1.0 , sigma =1.25 ,r_cut =1.25* 2**(1.0/6.0))
+polymer_brush.py:116  |  slj.pair_coeff.set('B','B', epsilon = 0, sigma = 1.0)
+polymer_brush.py:117  |  slj.pair_coeff.set('C','C', epsilon = 0, sigma = 1.0)
+polymer_brush.py:118  |  slj.pair_coeff.set('B','C', epsilon = 0, sigma = 1.0)
+polymer_brush.py:119  |  slj.pair_coeff.set('B','CH3_W1', epsilon = 0, sigma = 1.0)
+polymer_brush.py:120  |  slj.pair_coeff.set('B','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:121  |  slj.pair_coeff.set('B','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:122  |  slj.pair_coeff.set('C','CH3_W1', epsilon = 0, sigma = 1.0)
+polymer_brush.py:123  |  slj.pair_coeff.set('C','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:124  |  slj.pair_coeff.set('C','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:125  |  slj.pair_coeff.set('CH3_W1','CH3_W1', epsilon = 0, sigma = 1.0)
+polymer_brush.py:126  |  slj.pair_coeff.set('CH3_W1','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:127  |  slj.pair_coeff.set('CH3_W2','CH3_W2', epsilon = 0, sigma = 1.0)
+polymer_brush.py:128  |  slj.pair_coeff.set('CH3_W1','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:129  |  slj.pair_coeff.set('CH3_W2','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:130  |  slj.pair_coeff.set('SolvTail','SolvTail', epsilon = 0, sigma = 1.0)
+polymer_brush.py:133  |  harmonicO_O= bond.harmonic(name = 'O-O-bond')
+polymer_brush.py:135  |  harmonicO_O.bond_coeff.set('oleic', k=9892.9362 , r0=0.5)
+polymer_brush.py:138  |  harmonicO_O.bond_coeff.set('wall', k=9892.9362, r0=1.25)
+polymer_brush.py:141  |  angleWO = angle.harmonic()
+polymer_brush.py:142  |  angleWO.set_coeff('W-O' , k = 201.2878 , t0= 2.5307)
+polymer_brush.py:143  |  angleWO.set_coeff('O-O' , k = 201.2878 , t0= 1.92)
+polymer_brush.py:144  |  angleWO.set_coeff('kink' , k = 1000.2878 , t0= 2.8)
+polymer_brush.py:150  |  dihedralField = dihedral.harmonic()
+polymer_brush.py:151  |  dihedralField.set_coeff('DihedralW1' , k = 2.6838 , d=1 , n= 1)
+polymer_brush.py:152  |  dihedralField.set_coeff('DihedralW2' , k = 1.4543 , d=-1 , n= 2)
+polymer_brush.py:153  |  dihedralField.set_coeff('DihedralW3' , k =5.4347 , d=1 , n= 3)
+polymer_brush.py:154  |  dihedralField.set_coeff('Dihedral1' , k =2.6838 , d=1 , n= 1)
+polymer_brush.py:155  |  dihedralField.set_coeff('Dihedral2' , k = 1.4543 , d=-1 , n= 2)
+polymer_brush.py:156  |  dihedralField.set_coeff('Dihedral3' , k =5.4347 , d=1 , n= 3)
+polymer_brush.py:158  |  integrate.mode_standard(dt= 0.005)
+polymer_brush.py:160  |  integrator=integrate.nve(group=typeAll , limit=0.01 )
+polymer_brush.py:161  |  zeroer = update.zero_momentum(period = 1)
+polymer_brush.py:164  |  run(200)
+notice(2): -- Neighborlist exclusion statistics -- :
+notice(2): Particles with 1 exclusions             : 81920
+notice(2): Particles with 2 exclusions             : 363520
+notice(2): Neighbors included by diameter          : yes
+notice(2): Neighbors excluded when in the same body: no
+** starting run **
+Time 00:00:20 | Step 0 / 200 | TPS 0 | ETA -2562047:-47:-16
+Time 00:00:33 | Step 1 / 200 | TPS 0.0799381 | ETA 00:41:29
+Time 00:00:43 | Step 13 / 200 | TPS 1.19967 | ETA 00:02:35
+Time 00:01:02 | Step 22 / 200 | TPS 0.479794 | ETA 00:06:10
+Time 00:01:12 | Step 35 / 200 | TPS 1.22642 | ETA 00:02:14
+Time 00:01:25 | Step 43 / 200 | TPS 0.655331 | ETA 00:03:59
+Time 00:01:35 | Step 56 / 200 | TPS 1.25034 | ETA 00:01:55
+Time 00:01:47 | Step 64 / 200 | TPS 0.658592 | ETA 00:03:26
+Time 00:01:57 | Step 77 / 200 | TPS 1.25935 | ETA 00:01:37
+Time 00:02:10 | Step 85 / 200 | TPS 0.658595 | ETA 00:02:54
+Time 00:02:20 | Step 98 / 200 | TPS 1.26492 | ETA 00:01:20
+Time 00:02:31 | Step 104 / 200 | TPS 0.557842 | ETA 00:02:52
+Time 00:02:41 | Step 117 / 200 | TPS 1.26616 | ETA 00:01:05
+Time 00:02:51 | Step 123 / 200 | TPS 0.565769 | ETA 00:02:16
+Time 00:03:02 | Step 136 / 200 | TPS 1.26396 | ETA 00:00:50
+Time 00:03:13 | Step 143 / 200 | TPS 0.614083 | ETA 00:01:32
+Time 00:03:23 | Step 156 / 200 | TPS 1.27282 | ETA 00:00:34
+Time 00:03:41 | Step 164 / 200 | TPS 0.445128 | ETA 00:01:20
+Time 00:03:51 | Step 177 / 200 | TPS 1.28418 | ETA 00:00:17
+Time 00:04:04 | Step 185 / 200 | TPS 0.659555 | ETA 00:00:22
+Time 00:04:14 | Step 198 / 200 | TPS 1.28451 | ETA 00:00:01
+Time 00:04:15 | Step 200 / 200 | TPS 1.18866 | ETA 00:00:00
+Average TPS: 0.789114
+---------
+-- Neighborlist stats:
+8 normal updates / 2 forced updates / 0 dangerous updates
+n_neigh_min: 0 / n_neigh_max: 137 / n_neigh_avg: 46.011
+shortest rebuild period: 21
+-- Cell list stats:
+Dimension: 40, 40, 5
+n_min    : 8 / n_max: 134 / n_avg: 52.288
+** run complete **
+polymer_brush.py:165  |  zeroer.disable()
+polymer_brush.py:167  |  integrator.disable()
+polymer_brush.py:169  |  integrator=integrate.npt(group=typeAll , tau=1.0 , T= 1.0 , tauP = 1.2 , P = 0.00078 , x=False , y = False , z = True , rescale_all=True )
+polymer_brush.py:172  |  run(5e2, profile=True, limit_hours=1)
+** starting run **
+Time 00:04:25 | Step 204 / 700 | TPS 0.397185 | ETA 00:20:48
+Time 00:04:39 | Step 212 / 700 | TPS 0.574758 | ETA 00:14:09
+Time 00:04:53 | Step 220 / 700 | TPS 0.571413 | ETA 00:14:00
+Time 00:05:08 | Step 229 / 700 | TPS 0.602687 | ETA 00:13:01
+Time 00:05:28 | Step 237 / 700 | TPS 0.407408 | ETA 00:18:56
+Time 00:05:43 | Step 246 / 700 | TPS 0.60428 | ETA 00:12:31
+Time 00:05:59 | Step 256 / 700 | TPS 0.626309 | ETA 00:11:48
+Time 00:06:15 | Step 266 / 700 | TPS 0.625738 | ETA 00:11:33
+Time 00:06:29 | Step 274 / 700 | TPS 0.577745 | ETA 00:12:17
+Time 00:06:43 | Step 282 / 700 | TPS 0.575891 | ETA 00:12:05
+Time 00:06:56 | Step 290 / 700 | TPS 0.574774 | ETA 00:11:53
+Time 00:07:10 | Step 298 / 700 | TPS 0.574913 | ETA 00:11:39
+Time 00:07:20 | Step 302 / 700 | TPS 0.398517 | ETA 00:16:38
+Time 00:07:34 | Step 310 / 700 | TPS 0.571972 | ETA 00:11:21
+Time 00:07:54 | Step 318 / 700 | TPS 0.407743 | ETA 00:15:36
+Time 00:08:08 | Step 326 / 700 | TPS 0.572895 | ETA 00:10:52
+Time 00:08:23 | Step 335 / 700 | TPS 0.604107 | ETA 00:10:04
+Time 00:08:42 | Step 343 / 700 | TPS 0.410181 | ETA 00:14:30
+Time 00:08:56 | Step 351 / 700 | TPS 0.574778 | ETA 00:10:07
+Time 00:09:10 | Step 359 / 700 | TPS 0.575104 | ETA 00:09:52
+Time 00:09:24 | Step 367 / 700 | TPS 0.574553 | ETA 00:09:39
+Time 00:09:38 | Step 375 / 700 | TPS 0.571394 | ETA 00:09:28
+Time 00:09:51 | Step 382 / 700 | TPS 0.538013 | ETA 00:09:51
+Time 00:10:05 | Step 390 / 700 | TPS 0.568071 | ETA 00:09:05
+Time 00:10:19 | Step 398 / 700 | TPS 0.576993 | ETA 00:08:43
+Time 00:10:30 | Step 403 / 700 | TPS 0.455075 | ETA 00:10:52
+Time 00:10:41 | Step 408 / 700 | TPS 0.460623 | ETA 00:10:33
+Time 00:10:52 | Step 413 / 700 | TPS 0.462486 | ETA 00:10:20
+Time 00:11:05 | Step 420 / 700 | TPS 0.546486 | ETA 00:08:32
+Time 00:11:17 | Step 427 / 700 | TPS 0.546195 | ETA 00:08:19
+Time 00:11:30 | Step 434 / 700 | TPS 0.544488 | ETA 00:08:08
+Time 00:11:42 | Step 440 / 700 | TPS 0.509507 | ETA 00:08:30
+Time 00:11:55 | Step 447 / 700 | TPS 0.545307 | ETA 00:07:43
+Time 00:12:08 | Step 454 / 700 | TPS 0.544257 | ETA 00:07:31
+Time 00:12:20 | Step 460 / 700 | TPS 0.508595 | ETA 00:07:51
+Time 00:12:32 | Step 467 / 700 | TPS 0.545767 | ETA 00:07:06
+Time 00:12:44 | Step 473 / 700 | TPS 0.507049 | ETA 00:07:27
+Time 00:12:57 | Step 480 / 700 | TPS 0.54469 | ETA 00:06:43
+Time 00:13:10 | Step 487 / 700 | TPS 0.545253 | ETA 00:06:30
+Time 00:13:22 | Step 493 / 700 | TPS 0.504933 | ETA 00:06:49
+Time 00:13:34 | Step 499 / 700 | TPS 0.509785 | ETA 00:06:34
+Time 00:13:44 | Step 504 / 700 | TPS 0.458352 | ETA 00:07:07
+Time 00:13:59 | Step 507 / 700 | TPS 0.210624 | ETA 00:15:16
+Time 00:14:16 | Step 513 / 700 | TPS 0.346443 | ETA 00:08:59
+Time 00:14:28 | Step 519 / 700 | TPS 0.509531 | ETA 00:05:55
+Time 00:14:40 | Step 525 / 700 | TPS 0.510677 | ETA 00:05:42
+Time 00:14:51 | Step 531 / 700 | TPS 0.514238 | ETA 00:05:28
+Time 00:15:03 | Step 537 / 700 | TPS 0.514567 | ETA 00:05:16
+Time 00:15:14 | Step 543 / 700 | TPS 0.515139 | ETA 00:05:04
+Time 00:15:26 | Step 549 / 700 | TPS 0.51338 | ETA 00:04:54
+Time 00:15:39 | Step 556 / 700 | TPS 0.548921 | ETA 00:04:22
+Time 00:15:52 | Step 563 / 700 | TPS 0.546534 | ETA 00:04:10
+Time 00:16:03 | Step 569 / 700 | TPS 0.510636 | ETA 00:04:16
+Time 00:16:15 | Step 575 / 700 | TPS 0.510419 | ETA 00:04:04
+Time 00:16:32 | Step 581 / 700 | TPS 0.349876 | ETA 00:05:40
+Time 00:16:44 | Step 587 / 700 | TPS 0.511999 | ETA 00:03:40
+Time 00:16:56 | Step 593 / 700 | TPS 0.516448 | ETA 00:03:27
+Time 00:17:07 | Step 599 / 700 | TPS 0.518193 | ETA 00:03:14
+Time 00:17:18 | Step 604 / 700 | TPS 0.463956 | ETA 00:03:26
+Time 00:17:29 | Step 609 / 700 | TPS 0.470222 | ETA 00:03:13
+Time 00:17:39 | Step 614 / 700 | TPS 0.47063 | ETA 00:03:02
+Time 00:17:50 | Step 619 / 700 | TPS 0.471422 | ETA 00:02:51
+Time 00:18:02 | Step 625 / 700 | TPS 0.518828 | ETA 00:02:24
+Time 00:18:13 | Step 631 / 700 | TPS 0.514885 | ETA 00:02:14
+Time 00:18:25 | Step 637 / 700 | TPS 0.521742 | ETA 00:02:00
+Time 00:18:36 | Step 643 / 700 | TPS 0.520519 | ETA 00:01:49
+Time 00:18:48 | Step 649 / 700 | TPS 0.520219 | ETA 00:01:38
+Time 00:18:59 | Step 655 / 700 | TPS 0.522879 | ETA 00:01:26
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 82574.5 ON ivb106 CANCELLED AT 2017-05-15T08:01:28 DUE TO TIME LIMIT ***
+slurmstepd: error: *** JOB 82574 ON ivb106 CANCELLED AT 2017-05-15T08:01:28 DUE TO TIME LIMIT ***

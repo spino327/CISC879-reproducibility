@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "polymer_brush.py", line 5, in <module>
+Traceback (most recent call last):
+  File "polymer_brush.py", line 5, in <module>
+Traceback (most recent call last):
+  File "polymer_brush.py", line 5, in <module>
+Traceback (most recent call last):
+  File "polymer_brush.py", line 5, in <module>
+    from hoomd_script import *
+ImportError: No module named hoomd_script
+    from hoomd_script import *
+ImportError: No module named hoomd_script
+    from hoomd_script import *
+ImportError:     from hoomd_script import *
+No module named hoomd_script
+ImportError: No module named hoomd_script

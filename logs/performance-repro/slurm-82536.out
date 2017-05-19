@@ -1,0 +1,1 @@
+/cm/local/apps/slurm/var/spool/job82536/slurm_script: line 10: 29695 Floating point exceptionmpirun -n 4 python polymer_brush.py --mode=gpu --nrank=4 --nx=4 --ny=4 --user=8
